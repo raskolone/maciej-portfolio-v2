@@ -8,7 +8,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import ConstellationCanvas from "@/components/ConstellationCanvas";
 import TypewriterText from "@/components/TypewriterText";
 
-const AVATAR = "https://d2xsxph8kpxj0f.cloudfront.net/310519663489474725/R7k6sYKTkLq9Ymom2yutju/maciej-avatar_f2b22a3b.png";
+const AVATAR = "/manus-storage/maciej-hero-new_e2364866.webp";
 
 export default function HeroSection() {
   const { lang, t } = useLanguage();
@@ -41,16 +41,38 @@ export default function HeroSection() {
           className="animate-fade-in mb-6"
           style={{ opacity: 0, animationFillMode: "forwards" }}
         >
-          <div className="relative">
-            <div className="w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden border-2 border-primary/50 animate-glow-pulse">
+          <div className="relative inline-block">
+            {/* Outer pulse ring */}
+            <div
+              className="absolute rounded-full animate-glow-pulse pointer-events-none"
+              style={{
+                inset: "-10px",
+                border: "1px solid rgba(74,222,128,0.25)",
+                animationDelay: "0s",
+              }}
+            />
+            {/* Inner pulse ring */}
+            <div
+              className="absolute rounded-full animate-glow-pulse pointer-events-none"
+              style={{
+                inset: "-4px",
+                border: "1.5px solid rgba(74,222,128,0.45)",
+                animationDelay: "0.5s",
+              }}
+            />
+            {/* Photo */}
+            <div
+              className="w-36 h-36 md:w-44 md:h-44 rounded-full overflow-hidden border-2 border-primary/60"
+              style={{ boxShadow: "0 0 28px rgba(74,222,128,0.15)" }}
+            >
               <img
                 src={AVATAR}
                 alt="Maciej Wyrozumski"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-top"
               />
             </div>
             {/* Status dot */}
-            <div className="absolute bottom-1 right-1 glow-dot" />
+            <div className="absolute bottom-2 right-2 glow-dot" />
           </div>
         </div>
 
