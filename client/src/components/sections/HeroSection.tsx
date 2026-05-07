@@ -62,13 +62,13 @@ export default function HeroSection() {
             />
             {/* Photo */}
             <div
-              className="w-36 h-36 md:w-44 md:h-44 rounded-full overflow-hidden border-2 border-primary/60"
+              className="w-48 h-48 md:w-60 md:h-60 rounded-full overflow-hidden border-2 border-primary/60"
               style={{ boxShadow: "0 0 28px rgba(74,222,128,0.15)" }}
             >
               <img
                 src={AVATAR}
                 alt="Maciej Wyrozumski"
-                className="w-full h-full object-cover object-top"
+                className="w-full h-full object-cover" style={{ objectPosition: "50% 15%" }}
               />
             </div>
             {/* Status dot */}
@@ -82,7 +82,7 @@ export default function HeroSection() {
           style={{ opacity: 0, animationDelay: "0.25s", animationFillMode: "forwards" }}
         >
           <h1
-            className="text-6xl md:text-8xl font-bold text-foreground leading-none tracking-tight"
+            className="text-5xl md:text-7xl font-bold text-foreground leading-none tracking-tight"
             style={{ fontFamily: "'Cormorant Garamond', serif" }}
           >
             Maciej
