@@ -179,6 +179,43 @@ export default function AboutSection() {
                   <span key={tag} className="tag-green">{tag}</span>
                 ))}
               </div>
+
+              {/* Cribro venture block */}
+              <div
+                className="reveal-about mt-4 rounded-xl border border-primary/20 bg-primary/5 p-5"
+                style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <img
+                    src="https://d2xsxph8kpxj0f.cloudfront.net/310519663629907879/7jNV8eTUHBABzV8jpk3RUt/cribro-logo-main-fHanUQCNitTqJDBVpNRV8F.webp"
+                    alt="CriBro"
+                    className="h-6 w-auto"
+                  />
+                  <span
+                    className="text-xs text-primary/60 tracking-[0.2em] uppercase"
+                    style={{ fontFamily: "'DM Mono', monospace" }}
+                  >
+                    {t("Nowe przedsięwzięcie", "New venture")}
+                  </span>
+                </div>
+                <p className="text-sm text-foreground leading-relaxed mb-2">
+                  {t(
+                    "Cribro to marka, którą buduje na styku języka, technologii i neuroróżnorodności. Dwa odłamy — jeden skupiony na nauce angielskiego i budowaniu nawyków językowych (CriBro English), drugi na tworzeniu oprogramowania przyjaznego ADHD: narzędzi, które redukują rozproszenie, wspierają koncentrację i pomagają mózgowi działać na własnych zasadach.",
+                    "Cribro is a brand I'm building at the intersection of language, technology, and neurodiversity. Two branches — one focused on English learning and building language habits (CriBro English), the other on developing ADHD-friendly software: tools that reduce distraction, support focus, and help the brain work on its own terms."
+                  )}
+                </p>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  {t(
+                    "Wyobraźnia jest jedynym ograniczeniem. Buduję rzeczy, które działają — dla ludzi, którym standardowe rozwiązania nie wystarczają.",
+                    "Imagination is the only limit. I build things that work — for people who find standard solutions insufficient."
+                  )}
+                </p>
+                <div className="flex flex-wrap gap-2 mt-3">
+                  {["CriBro English", "ADHD-Friendly Tech", "EdTech", "Habit Building", "cribro.pro"].map((tag) => (
+                    <span key={tag} className="tag-green" style={{ fontSize: "10px" }}>{tag}</span>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>

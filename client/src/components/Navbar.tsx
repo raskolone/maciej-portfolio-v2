@@ -106,7 +106,7 @@ export default function Navbar() {
           </li>
           <li>
             <a
-              href="https://vocabboost-ai-170162955981.us-west1.run.app/"
+              href="https://recall.cribroenglish.pro"
               target="_blank"
               rel="noopener noreferrer"
               className="text-xs tracking-wide px-3 py-1.5 rounded border border-primary/40 text-primary hover:bg-primary/10 transition-all"
