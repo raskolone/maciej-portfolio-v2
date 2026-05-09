@@ -203,7 +203,7 @@ export default function AboutSection() {
         </div>
 
         {/* ── SEKCJA NOWE PRZEDSIĘWZIĘCIE — pełna szerokość, wyrównana do siatki ── */}
-        <div className="grid lg:grid-cols-12 gap-12 items-start">
+        <div id="cribro-venture" className="grid lg:grid-cols-12 gap-12 items-start" style={{ scrollMarginTop: "80px" }}>
 
           {/* Left column: logo z pulsarem */}
           <div className="lg:col-span-4">
@@ -257,6 +257,48 @@ export default function AboutSection() {
                 />
               </div>
             </div>
+
+            {/* Boks Cribro Labs — Aplikacje, szerokość = logo (maxWidth 260px) */}
+            <div
+              className="reveal-about mt-8"
+              style={{
+                opacity: 0,
+                transform: "translateY(16px)",
+                transition: "opacity 0.5s ease, transform 0.5s ease",
+                maxWidth: "260px",
+              }}
+            >
+              <a
+                href="/apps"
+                className="block group"
+                style={{ textDecoration: "none" }}
+              >
+                <div
+                  style={{
+                    border: "1px solid oklch(0.65 0.2 145 / 0.35)",
+                    borderRadius: "2px",
+                    padding: "12px 16px",
+                    background: "oklch(0.65 0.2 145 / 0.05)",
+                    transition: "background 0.2s ease, border-color 0.2s ease",
+                  }}
+                  className="group-hover:bg-primary/10 group-hover:border-primary/60"
+                >
+                  <p
+                    className="text-xs text-primary/60 tracking-[0.18em] uppercase mb-1"
+                    style={{ fontFamily: "'DM Mono', monospace" }}
+                  >
+                    {t("Aplikacje", "Apps")}
+                  </p>
+                  <p
+                    className="text-sm font-semibold text-primary group-hover:text-primary/90 transition-colors"
+                    style={{ fontFamily: "'DM Sans', sans-serif" }}
+                  >
+                    Cribro Labs
+                  </p>
+                </div>
+              </a>
+            </div>
+
           </div>
 
           {/* Right column: opis Cribro — wyrównany z tekstem O mnie */}

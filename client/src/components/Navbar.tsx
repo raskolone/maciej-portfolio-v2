@@ -96,13 +96,13 @@ export default function Navbar() {
             </li>
           ))}
           <li>
-            <Link
-              href="/apps"
-              className="text-sm text-muted-foreground hover:text-primary transition-colors"
-              style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 400 }}
+            <button
+              onClick={() => scrollTo("#cribro-venture")}
+              className="text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
+              style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600 }}
             >
-              {t("Aplikacje", "Apps")}
-            </Link>
+              Cribro
+            </button>
           </li>
           <li>
             <a
@@ -161,13 +161,12 @@ export default function Navbar() {
               {lang === "pl" ? link.pl : link.en}
             </button>
           ))}
-          <Link
-            href="/apps"
-            onClick={() => setMenuOpen(false)}
-            className="text-left text-sm text-muted-foreground hover:text-primary transition-colors py-1"
+          <button
+            onClick={() => { setMenuOpen(false); scrollTo("#cribro-venture"); }}
+            className="text-left text-sm font-semibold text-primary hover:text-primary/80 transition-colors py-1"
           >
-            {t("Aplikacje", "Apps")}
-          </Link>
+            Cribro
+          </button>
           <div className="flex items-center gap-4 pt-2">
             <button
               onClick={toggleLang}
