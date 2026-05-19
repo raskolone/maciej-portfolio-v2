@@ -9,28 +9,28 @@ import { Check } from "lucide-react";
 
 const pricingItems = [
   {
-    pl: { name: "Lekcja indywidualna online", duration: "60 min", price: "90 zł", note: "Najczęściej wybierana" },
-    en: { name: "Individual lesson online", duration: "60 min", price: "PLN 90", note: "Most popular" },
+    pl: { name: "Lekcja indywidualna online", duration: "60 min", price: "120 zł", note: "Najczęściej wybierana" },
+    en: { name: "Individual lesson online", duration: "60 min", price: "PLN 120", note: "Most popular" },
     highlight: true,
   },
   {
-    pl: { name: "Lekcja stacjonarna", duration: "60 min", price: "100 zł", note: "Bielsko-Biała i okolice" },
-    en: { name: "In-person lesson", duration: "60 min", price: "PLN 100", note: "Bielsko-Biała area" },
+    pl: { name: "Lekcja stacjonarna", duration: "60 min", price: "140 zł", note: "Bielsko-Biała i okolice" },
+    en: { name: "In-person lesson", duration: "60 min", price: "PLN 140", note: "Bielsko-Biała area" },
     highlight: false,
   },
   {
-    pl: { name: "Pakiet 4 lekcji online", duration: "4 × 60 min", price: "340 zł", note: "Oszczędzasz 20 zł" },
-    en: { name: "4-lesson online package", duration: "4 × 60 min", price: "PLN 340", note: "Save PLN 20" },
+    pl: { name: "Pakiet 4 lekcji online", duration: "4 × 60 min", price: "400 zł", note: "Oszczędzasz 80 zł" },
+    en: { name: "4-lesson online package", duration: "4 × 60 min", price: "PLN 400", note: "Save PLN 80" },
     highlight: false,
   },
   {
-    pl: { name: "Business English / specjalistyczne", duration: "60 min", price: "od 120 zł", note: "Firmy, negocjacje, prezentacje" },
-    en: { name: "Business English / specialist", duration: "60 min", price: "from PLN 120", note: "Companies, negotiations, presentations" },
+    pl: { name: "Business English / specjalistyczne", duration: "60 min", price: "140 zł", note: "Firmy, negocjacje, prezentacje" },
+    en: { name: "Business English / specialist", duration: "60 min", price: "PLN 140", note: "Companies, negotiations, presentations" },
     highlight: false,
   },
   {
-    pl: { name: "Dojazd lub zajęcia niestandardowe", duration: "wycena", price: "indywidualnie", note: "Katowice i woj. śląskie" },
-    en: { name: "Travel or non-standard lessons", duration: "quote", price: "individual", note: "Katowice & Silesia region" },
+    pl: { name: "Angielski dla firm / tłumaczenia", duration: "wycena", price: "indywidualnie", note: "Wycena indywidualna" },
+    en: { name: "Corporate English / translations", duration: "quote", price: "individual", note: "Custom quote" },
     highlight: false,
   },
 ];
