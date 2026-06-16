@@ -10,7 +10,6 @@ import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { href: "#about",    pl: "O mnie",   en: "About" },
-  { href: "#for-whom", pl: "Dla kogo", en: "For Whom" },
   { href: "#method",   pl: "Metoda",   en: "Method" },
   { href: "#pricing",  pl: "Cennik",   en: "Pricing" },
   { href: "#faq",      pl: "FAQ",      en: "FAQ" },
@@ -105,11 +104,20 @@ export default function Navbar() {
             </button>
           </li>
           <li>
+            <button
+              onClick={() => scrollTo("#b2b")}
+              className="text-xs tracking-wide px-3 py-1.5 rounded border border-primary bg-primary/10 text-primary hover:bg-primary/20 transition-all font-semibold"
+              style={{ fontFamily: "'DM Sans', sans-serif" }}
+            >
+              {t("DLA FIRM", "FOR BUSINESS")}
+            </button>
+          </li>
+          <li>
             <a
               href="https://recall.cribroenglish.pro"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs tracking-wide px-3 py-1.5 rounded border border-primary/40 text-primary hover:bg-primary/10 transition-all"
+              className="text-xs tracking-wide px-3 py-1.5 rounded border border-border/60 text-muted-foreground hover:text-primary hover:border-primary/40 transition-all"
               style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 500 }}
             >
               {t("Panel kursanta", "Student Panel")}
@@ -135,7 +143,7 @@ export default function Navbar() {
             rel="noopener noreferrer"
             className="btn-primary text-xs py-2 px-4"
           >
-            {t("Umów lekcję", "Book a lesson")}
+            {t("Bezpłatna konsultacja", "Free Consultation")}
           </a>
         </div>
 

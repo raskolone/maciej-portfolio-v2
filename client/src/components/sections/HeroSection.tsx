@@ -14,8 +14,8 @@ export default function HeroSection() {
   const { lang, t } = useLanguage();
 
   const phrases = lang === "pl"
-    ? ["Full Immersion Teacher", "Pronunciation Coach", "EdTech Builder", "AI Enthusiast"]
-    : ["Full Immersion Teacher", "Pronunciation Coach", "EdTech Builder", "AI Enthusiast"];
+    ? ["Business English Expert", "Pronunciation Coach", "Full Immersion Trainer", "ADHD-Friendly Educator"]
+    : ["Business English Expert", "Pronunciation Coach", "Full Immersion Trainer", "ADHD-Friendly Educator"];
 
   return (
     <section
@@ -112,8 +112,8 @@ export default function HeroSection() {
           style={{ opacity: 0, animationDelay: "0.6s", animationFillMode: "forwards", fontFamily: "'DM Sans', sans-serif" }}
         >
           {t(
-            "10 lat doświadczenia w nauczaniu angielskiego. Specjalizacja: fonetyka, Business English, full immersion. Online i w Bielsku-Białej.",
-            "10 years of experience teaching English. Specialization: phonetics, Business English, full immersion. Online and in Bielsko-Biała."
+            "Pomagam firmom przełamywać bariery komunikacyjne przez The Cribro Method — Full Immersion dopasowany do neuroóżnorodnych mózgw i zapracowanych menedżerów.",
+            "I help companies break communication barriers through The Cribro Method — Full Immersion designed for neurodivergent minds and busy managers."
           )}
         </p>
 
@@ -128,15 +128,14 @@ export default function HeroSection() {
             rel="noopener noreferrer"
             className="btn-primary"
           >
-            {t("Umów pierwszą lekcję", "Book a lesson")}
+            {t("Umów bezpłatną konsultację", "Book Free Consultation")}
           </a>
-          <a
-            href="#about"
-            onClick={(e) => { e.preventDefault(); document.querySelector("#about")?.scrollIntoView({ behavior: "smooth" }); }}
+          <button
+            onClick={() => document.querySelector("#b2b")?.scrollIntoView({ behavior: "smooth" })}
             className="btn-secondary"
           >
-            {t("Poznaj mnie", "About me")}
-          </a>
+            {t("Oferta dla firm", "For Business")}
+          </button>
         </div>
 
         {/* Proof stats */}

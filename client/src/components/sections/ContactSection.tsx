@@ -14,6 +14,8 @@ export default function ContactSection() {
     name: "",
     email: "",
     phone: "",
+    companyName: "",
+    teamSize: "",
     forWhom: "",
     goal: "",
     format: "",
@@ -45,6 +47,8 @@ export default function ContactSection() {
           name: form.name,
           email: form.email,
           phone: form.phone,
+          companyName: form.companyName,
+          teamSize: form.teamSize,
           forWhom: form.forWhom,
           goal: form.goal,
           format: form.format,
@@ -53,7 +57,7 @@ export default function ContactSection() {
       });
       if (res.ok) {
         toast.success(t("Wiadomość wysłana! Odpiszę w ciągu 24 godzin.", "Message sent! I'll reply within 24 hours."));
-        setForm({ name: "", email: "", phone: "", forWhom: "", goal: "", format: "", message: "", rodo: false });
+        setForm({ name: "", email: "", phone: "", companyName: "", teamSize: "", forWhom: "", goal: "", format: "", message: "", rodo: false });
       } else {
         throw new Error("send failed");
       }
@@ -161,6 +165,34 @@ export default function ContactSection() {
                   />
                 </div>
               </div>
+
+              {/* B2B fields — shown when forWhom is company */}
+              {form.forWhom === "company" && (
+                <div className="grid sm:grid-cols-2 gap-5 p-4 border border-primary/20 bg-primary/5">
+                  <div>
+                    <label className={labelClass}>{t("Nazwa firmy", "Company name")}</label>
+                    <input
+                      type="text"
+                      name="companyName"
+                      value={form.companyName}
+                      onChange={handleChange}
+                      placeholder={t("Nazwa Twojej firmy", "Your company name")}
+                      className={inputClass}
+                    />
+                  </div>
+                  <div>
+                    <label className={labelClass}>{t("Liczba osób do przeszkolenia", "Number of people to train")}</label>
+                    <input
+                      type="text"
+                      name="teamSize"
+                      value={form.teamSize}
+                      onChange={handleChange}
+                      placeholder={t("np. 5 osób", "e.g. 5 people")}
+                      className={inputClass}
+                    />
+                  </div>
+                </div>
+              )}
 
               <div className="grid sm:grid-cols-2 gap-5">
                 <div>
