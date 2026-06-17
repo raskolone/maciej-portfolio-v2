@@ -4,9 +4,8 @@
    B2B tab: concrete packages with prices based on market analysis
    ============================================================= */
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useRevealAnimation } from "@/hooks/useRevealAnimation";
 import { Check } from "lucide-react";
 
 const individualItems = [
@@ -152,8 +151,28 @@ const individualNotes = [
 
 export default function PricingSection() {
   const { lang, t } = useLanguage();
-  const sectionRef = useRevealAnimation(90);
+  const sectionRef = useRef<HTMLElement>(null);
   const [activeTab, setActiveTab] = useState<"individual" | "b2b">("b2b");
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.querySelectorAll(".reveal-price").forEach((el, i) => {
+              setTimeout(() => {
+                (el as HTMLElement).style.opacity = "1";
+                (el as HTMLElement).style.transform = "translateY(0)";
+              }, i * 80);
+            });
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section id="pricing" ref={sectionRef} className="py-24 bg-card/30">
@@ -205,11 +224,12 @@ export default function PricingSection() {
                 return (
                   <div
                     key={pkg.id}
-                    className={`${i % 2 === 0 ? 'reveal-left' : 'reveal-right'} flex flex-col p-6 border transition-all ${
+                    className={`reveal-price flex flex-col p-6 border transition-all ${
                       pkg.highlight
                         ? "border-primary/50 bg-primary/6 shadow-lg shadow-primary/10"
                         : "border-border/50 bg-card"
                     }`}
+                    style={{ opacity: 0, transform: "translateY(12px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
                   >
                     {/* Badge */}
                     <div className="flex items-start justify-between mb-4">
@@ -277,7 +297,8 @@ export default function PricingSection() {
 
             {/* B2B notes */}
             <div
-              className="reveal-up grid sm:grid-cols-2 lg:grid-cols-4 gap-4 p-6 bg-card/40 border border-border/30"
+              className="reveal-price grid sm:grid-cols-2 lg:grid-cols-4 gap-4 p-6 bg-card/40 border border-border/30"
+              style={{ opacity: 0, transform: "translateY(12px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
             >
               {b2bNotes.map((note) => (
                 <div key={note.pl} className="flex items-start gap-2.5">
@@ -305,11 +326,12 @@ export default function PricingSection() {
                 return (
                   <div
                     key={i}
-                    className={`${i % 2 === 0 ? 'reveal-left' : 'reveal-right'} flex items-center justify-between p-5 border transition-all ${
+                    className={`reveal-price flex items-center justify-between p-5 border transition-all ${
                       item.highlight
                         ? "border-primary/40 bg-primary/8 shadow-sm"
                         : "border-border/60 bg-card card-glow"
                     }`}
+                    style={{ opacity: 0, transform: "translateY(12px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
                   >
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">
@@ -340,7 +362,8 @@ export default function PricingSection() {
             </div>
 
             <div
-              className="reveal-right"
+              className="reveal-price"
+              style={{ opacity: 0, transform: "translateY(12px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
             >
               <div className="bg-card p-6 border border-border/60">
                 <h3

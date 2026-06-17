@@ -3,8 +3,8 @@
    Personal, warm, short biography
    ============================================================= */
 
+import { useEffect, useRef } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useRevealAnimation } from "@/hooks/useRevealAnimation";
 
 const PHOTO = "https://d2xsxph8kpxj0f.cloudfront.net/310519663489474725/R7k6sYKTkLq9Ymom2yutju/maciej-photo-editorial_4c075e9b.png";
 
@@ -16,7 +16,27 @@ const stats = [
 
 export default function AboutSection() {
   const { t } = useLanguage();
-  const sectionRef = useRevealAnimation(110);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.querySelectorAll(".reveal-about").forEach((el, i) => {
+              setTimeout(() => {
+                (el as HTMLElement).style.opacity = "1";
+                (el as HTMLElement).style.transform = "translateY(0)";
+              }, i * 120);
+            });
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section id="about" ref={sectionRef} className="py-24 bg-background">
@@ -26,7 +46,7 @@ export default function AboutSection() {
         <div className="grid lg:grid-cols-12 gap-12 items-start">
 
           {/* Left column: label + heading + stats */}
-          <div className="reveal-left lg:col-span-4">
+          <div className="lg:col-span-4">
             <div className="relative mb-8">
               <span className="deco-number">04</span>
               <p className="section-label mb-3">{t("O mnie", "About Me")}</p>
@@ -41,7 +61,8 @@ export default function AboutSection() {
 
             {/* Stats */}
             <div
-              className="grid grid-cols-3 lg:grid-cols-1 gap-4 mt-8"
+              className="reveal-about grid grid-cols-3 lg:grid-cols-1 gap-4 mt-8"
+              style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
             >
               {stats.map((stat) => (
                 <div key={stat.num} className="border-l-2 border-primary pl-4 py-1">
@@ -60,12 +81,15 @@ export default function AboutSection() {
           </div>
 
           {/* Right column: bio text */}
-          <div className="reveal-right lg:col-span-8">
+          <div className="lg:col-span-8">
             <div className="space-y-6">
               {/* Photo inline — float right, rozmiar jednego akapitu */}
               <div
-                className="float-right ml-6 mb-4 hidden sm:block"
+                className="reveal-about float-right ml-6 mb-4 hidden sm:block"
                 style={{
+                  opacity: 0,
+                  transform: "translateY(16px)",
+                  transition: "opacity 0.5s ease, transform 0.5s ease",
                   width: "160px",
                   flexShrink: 0,
                 }}
@@ -88,8 +112,9 @@ export default function AboutSection() {
               </div>
 
               <div
-              className=""
-            >
+                className="reveal-about"
+                style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
+              >
                 <p className="text-base text-foreground leading-relaxed">
                   {t(
                     "Jestem lektorem języka angielskiego i absolwentem filologii angielskiej. Od ponad 10 lat pracuję z młodzieżą, studentami i dorosłymi — od poziomu A1 aż po C1. Przez lata byłem współwłaścicielem i managerem szkoły językowej, gdzie nadzorowałem pracę zespołu lektorów i dbałem o jakość metodyczną zajęć.",
@@ -99,22 +124,24 @@ export default function AboutSection() {
               </div>
 
               <div
-                className=""
-            >
+                className="reveal-about"
+                style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
+              >
                 <p className="text-base text-muted-foreground leading-relaxed">
                   {t(
-                    "Na moich zajęciach stawiamam na mówienie, osłuchanie z językiem i poprawną wymowę. Fonetyka to moja pasja — pracowałem jako Pronunciation Coach, pomagając klientom nie tylko mówić poprawnie, ale brzmieć naturalnie i pewnie. Zależy mi, żeby nauka była uporządkowana, praktyczna i bez zbędnego stresu.",
+                    "Na moich zajęciach stawiam na mówienie, osłuchanie z językiem i poprawną wymowę. Fonetyka to moja pasja — pracowałem jako Pronunciation Coach, pomagając klientom nie tylko mówić poprawnie, ale brzmieć naturalnie i pewnie. Zależy mi, żeby nauka była uporządkowana, praktyczna i bez zbędnego stresu.",
                     "In my lessons, I focus on speaking, language exposure, and correct pronunciation. Phonetics is my passion — I have worked as a Pronunciation Coach, helping clients not only speak correctly but sound natural and confident. I care about learning being organized, practical, and free from unnecessary stress."
                   )}
                 </p>
               </div>
 
               <div
-                className=""
-            >
+                className="reveal-about"
+                style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
+              >
                 <p className="text-base text-muted-foreground leading-relaxed">
                   {t(
-                    "Jestem ADHD.D. Wiem, jak uczy się mózg, który nie znosi nudy, chaosu i przeciążenia informacją. Dlatego moje zajęcia są zbudowane inaczej — mniej materiału, więcej sensu. Krótkie bloki, jasna struktura, zero zbędnego szumu. Uczę tak, jak sam chciałbym być uczony.",
+                    "Jestem ADHD. Wiem, jak uczy się mózg, który nie znosi nudy, chaosu i przeciążenia informacją. Dlatego moje zajęcia są zbudowane inaczej — mniej materiału, więcej sensu. Krótkie bloki, jasna struktura, zero zbędnego szumu. Uczę tak, jak sam chciałbym być uczony.",
                     "I have ADHD. I know how a brain learns when it can't stand boredom, chaos, or information overload. That's why my lessons are built differently — less material, more meaning. Short blocks, clear structure, zero unnecessary noise. I teach the way I'd want to be taught."
                   )}
                 </p>
@@ -122,7 +149,8 @@ export default function AboutSection() {
 
               {/* Philosophy block */}
               <div
-                className="border-l-2 border-primary/40 pl-5 py-2"
+                className="reveal-about border-l-2 border-primary/40 pl-5 py-2"
+                style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
               >
                 <p
                   className="text-base text-foreground font-medium leading-relaxed italic"
@@ -144,7 +172,8 @@ export default function AboutSection() {
 
               {/* Tags */}
               <div
-                className="flex flex-wrap gap-2 pt-2"
+                className="reveal-about flex flex-wrap gap-2 pt-2"
+                style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
               >
                 {["Business English", "Pronunciation Coach", "Cambridge Exams", "CEFR A1–C1", "Full Immersion", "ADHD-Friendly", "EdTech"].map((tag) => (
                   <span key={tag} className="tag-green">{tag}</span>
@@ -157,7 +186,83 @@ export default function AboutSection() {
 
       </div>
 
+      {/* ── SEKCJA CRIBRO — pełna szerokość, zintegrowana wizualnie ── */}
+      <div
+        id="cribro-venture"
+        className="mt-0"
+        style={{
+          background: "linear-gradient(135deg, oklch(0.13 0.02 240) 0%, oklch(0.11 0.015 240) 100%)",
+          borderTop: "1px solid oklch(0.65 0.2 145 / 0.15)",
+          scrollMarginTop: "80px",
+        }}
+      >
+        <div className="container py-16">
+          <div className="grid lg:grid-cols-12 gap-8 items-center">
 
+            {/* Left: logo + brand name */}
+            <div className="lg:col-span-4">
+              <div
+                className="reveal-about flex items-center gap-5"
+                style={{ opacity: 0, transform: "translateX(-20px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
+              >
+                <div
+                  className="flex-shrink-0 overflow-hidden"
+                  style={{
+                    width: "72px",
+                    height: "72px",
+                    borderRadius: "2px",
+                    border: "1px solid oklch(0.65 0.2 145 / 0.3)",
+                    background: "oklch(0.09 0.01 240)",
+                  }}
+                >
+                  <img
+                    src="https://d2xsxph8kpxj0f.cloudfront.net/310519663629907879/7jNV8eTUHBABzV8jpk3RUt/cribro-logo-main-fHanUQCNitTqJDBVpNRV8F.webp"
+                    alt="Cribro"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div>
+                  <p
+                    className="text-xs text-primary/60 tracking-[0.2em] uppercase mb-1"
+                    style={{ fontFamily: "'DM Mono', monospace" }}
+                  >
+                    {t("Nowe przedsięwzięcie", "New venture")}
+                  </p>
+                  <h3
+                    className="text-2xl font-bold text-foreground"
+                    style={{ fontFamily: "'Cormorant Garamond', serif" }}
+                  >
+                    Cribro
+                  </h3>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: opis + link */}
+            <div className="lg:col-span-8">
+              <div
+                className="reveal-about"
+                style={{ opacity: 0, transform: "translateX(20px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
+              >
+                <p className="text-sm text-muted-foreground leading-relaxed mb-5 max-w-2xl">
+                  {t(
+                    "Cribro to marka na styku języka, technologii i neuroóżnorodności. Dwa odłamy: CriBro English — system nauki angielskiego oparty na Full Immersion, oraz Cribro Labs — narzędzia ADHD-friendly, które pomagają mózgowi działać na własnych zasadach.",
+                    "Cribro is a brand at the intersection of language, technology, and neurodiversity. Two branches: CriBro English — a Full Immersion language learning system, and Cribro Labs — ADHD-friendly tools that help the brain work on its own terms."
+                  )}
+                </p>
+                <a
+                  href="/cribro"
+                  className="inline-flex items-center gap-2 text-sm text-primary font-medium hover:text-primary/80 transition-colors"
+                  style={{ fontFamily: "'DM Mono', monospace", letterSpacing: "0.05em" }}
+                >
+                  {t("Dowiedz się więcej →", "Learn more →")}
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
 
     </section>
   );

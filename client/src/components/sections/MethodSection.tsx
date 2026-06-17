@@ -3,10 +3,10 @@
    4 pillars of teaching method, asymmetric layout
    ============================================================= */
 
+import { useEffect, useRef } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useRevealAnimation } from "@/hooks/useRevealAnimation";
 
-const METHOD_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663629907879/7jNV8eTUHBABzV8jpk3RUt/cribro-method-sieve-DqDvJw7DuzpihBR4PFzrjF.webp";
+const ABOUT_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663586786146/TAFunkDrFdD3zZyACdoLmY/about-bg-TaevRFcopD2KaKEpjanKkc.webp";
 
 const pillars = [
   {
@@ -38,7 +38,27 @@ const pillars = [
 
 export default function MethodSection() {
   const { lang, t } = useLanguage();
-  const sectionRef = useRevealAnimation(100);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.querySelectorAll(".reveal-pillar").forEach((el, i) => {
+              setTimeout(() => {
+                (el as HTMLElement).style.opacity = "1";
+                (el as HTMLElement).style.transform = "translateX(0)";
+              }, i * 100);
+            });
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section id="method" ref={sectionRef} className="py-24 bg-card/20">
@@ -46,13 +66,12 @@ export default function MethodSection() {
         <div className="grid lg:grid-cols-2 gap-16 items-start">
 
           {/* Left: image + label */}
-          <div className="reveal-left relative">
+          <div className="relative">
             <div className="relative overflow-hidden rounded-sm shadow-xl border border-primary/20">
               <img
-                src={METHOD_IMG}
+                src={ABOUT_BG}
                 alt={t("Metoda nauczania", "Teaching method")}
-                className="w-full h-80 lg:h-[500px] object-cover object-top"
-                style={{ mixBlendMode: "lighten", filter: "brightness(0.9) contrast(1.05)" }}
+                className="w-full h-80 lg:h-[500px] object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
               <div className="absolute bottom-6 left-6 right-6">
@@ -76,10 +95,10 @@ export default function MethodSection() {
           </div>
 
           {/* Right: pillars */}
-          <div className="reveal-right">
+          <div>
             <div className="relative mb-10">
               <span className="deco-number">03</span>
-              <p className="section-label mb-3">{t("Metoda Cribro", "Cribro Method")}</p>
+              <p className="section-label mb-3">{t("Jak uczę", "How I Teach")}</p>
               <h2
                 className="text-3xl md:text-4xl font-bold text-foreground"
                 style={{ fontFamily: "'Cormorant Garamond', serif" }}
@@ -107,7 +126,8 @@ export default function MethodSection() {
                 return (
                   <div
                     key={pillar.num}
-                    className="flex gap-5 group"
+                    className="reveal-pillar flex gap-5 group"
+                    style={{ opacity: 0, transform: "translateX(-16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
                   >
                     <div className="flex-shrink-0 w-10 h-10 rounded-sm bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                       <span

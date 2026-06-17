@@ -5,13 +5,11 @@
 
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useRevealAnimation } from "@/hooks/useRevealAnimation";
 import { Mail, Phone, Linkedin, Send, Clock } from "lucide-react";
 import { toast } from "sonner";
 
 export default function ContactSection() {
   const { t } = useLanguage();
-  const sectionRef = useRevealAnimation(100);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -74,12 +72,12 @@ export default function ContactSection() {
   const labelClass = "block text-xs font-medium text-muted-foreground mb-1.5 tracking-wide uppercase";
 
   return (
-    <section id="contact" ref={sectionRef} className="py-24 bg-card/30">
+    <section id="contact" className="py-24 bg-card/30">
       <div className="container">
         <div className="grid lg:grid-cols-12 gap-12">
 
           {/* Left: heading + contact info */}
-          <div className="reveal-left lg:col-span-4">
+          <div className="lg:col-span-4">
             <div className="relative mb-8">
               <span className="deco-number">07</span>
               <p className="section-label mb-3">{t("Kontakt", "Contact")}</p>
@@ -139,7 +137,7 @@ export default function ContactSection() {
           </div>
 
           {/* Right: form */}
-          <div className="reveal-right lg:col-span-8">
+          <div className="lg:col-span-8">
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="grid sm:grid-cols-2 gap-5">
                 <div>
