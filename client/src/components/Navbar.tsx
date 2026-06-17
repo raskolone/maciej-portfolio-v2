@@ -1,21 +1,12 @@
 /* =============================================================
    DESIGN: Dark Constellation — Navbar
    Transparent on top, blurs on scroll
-   Logo: MW. | Nav links | PL/EN toggle | Theme toggle | CTA
+   Logo: MW. | Nav links | PL/EN toggle | CTA
    ============================================================= */
 import { useEffect, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Link, useLocation } from "wouter";
+import { useLocation } from "wouter";
 import { Menu, X } from "lucide-react";
-
-const navLinks = [
-  { href: "#about",    pl: "O mnie",   en: "About" },
-  { href: "#method",   pl: "Metoda Cribro",   en: "Cribro Method" },
-  { href: "#for-whom", pl: "Dla kogo",  en: "For Whom" },
-  { href: "#pricing",  pl: "Cennik",   en: "Pricing" },
-  { href: "#faq",      pl: "FAQ",      en: "FAQ" },
-  { href: "#contact",  pl: "Kontakt",  en: "Contact" },
-];
 
 export default function Navbar() {
   const { lang, toggleLang, t } = useLanguage();
@@ -29,7 +20,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Obsługuj scrollowanie po powrocie na stronę główną
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const scrollTo = params.get("scroll");
@@ -37,7 +27,6 @@ export default function Navbar() {
       setTimeout(() => {
         const el = document.querySelector(`#${scrollTo}`);
         if (el) el.scrollIntoView({ behavior: "smooth" });
-        // Wyczyść URL
         window.history.replaceState({}, document.title, window.location.pathname);
       }, 100);
     }
@@ -45,12 +34,10 @@ export default function Navbar() {
 
   const scrollTo = (href: string) => {
     setMenuOpen(false);
-    // Jeśli jesteśmy na stronie głównej, scrolluj do sekcji
     if (location === "/") {
       const el = document.querySelector(href);
       if (el) el.scrollIntoView({ behavior: "smooth" });
     } else {
-      // Jeśli jesteśmy na innej stronie, przejdź do strony głównej i scrolluj
       window.location.href = `/?scroll=${href.substring(1)}`;
     }
   };
@@ -59,9 +46,13 @@ export default function Navbar() {
     ? "bg-background/90 backdrop-blur-xl border-b border-border shadow-sm"
     : "bg-transparent";
 
+  const linkClass = "text-sm text-muted-foreground hover:text-primary transition-colors";
+  const linkStyle = { fontFamily: "'DM Sans', sans-serif", fontWeight: 400 };
+
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navBg}`}>
       <div className="container flex items-center justify-between h-16">
+
         {/* Logo */}
         <a
           href="#"
@@ -84,42 +75,45 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <ul className="hidden lg:flex items-center gap-7">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              {link.href === "#for-whom" ? (
-                <>
-                  <button
-                    onClick={() => scrollTo(link.href)}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                    style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 400 }}
-                  >
-                    {lang === "pl" ? link.pl : link.en}
-                  </button>
-                  <button
-                    onClick={() => scrollTo("#for-whom")}
-                    className="ml-3 text-xs font-semibold px-3 py-1.5 rounded-sm transition-all"
-                    style={{
-                      fontFamily: "'DM Sans', sans-serif",
-                      background: "oklch(0.65 0.2 145)",
-                      color: "#0a0a0a",
-                      letterSpacing: "0.04em",
-                      boxShadow: "0 0 10px oklch(0.65 0.2 145 / 0.4)",
-                    }}
-                  >
-                    {lang === "pl" ? "Dla firm" : "For Business"}
-                  </button>
-                </>
-              ) : (
-                <button
-                  onClick={() => scrollTo(link.href)}
-                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                  style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 400 }}
-                >
-                  {lang === "pl" ? link.pl : link.en}
-                </button>
-              )}
-            </li>
-          ))}
+          <li>
+            <button onClick={() => scrollTo("#about")} className={linkClass} style={linkStyle}>
+              {lang === "pl" ? "O mnie" : "About"}
+            </button>
+          </li>
+          <li>
+            <button
+              onClick={() => scrollTo("#for-whom")}
+              className="text-sm transition-colors hover:opacity-80"
+              style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, color: "oklch(0.65 0.2 145)" }}
+            >
+              {lang === "pl" ? "Dla firm" : "For Business"}
+            </button>
+          </li>
+          <li>
+            <button onClick={() => scrollTo("#method")} className={linkClass} style={linkStyle}>
+              {lang === "pl" ? "Metoda Cribro" : "Cribro Method"}
+            </button>
+          </li>
+          <li>
+            <button onClick={() => scrollTo("#for-whom")} className={linkClass} style={linkStyle}>
+              {lang === "pl" ? "Dla kogo" : "For Whom"}
+            </button>
+          </li>
+          <li>
+            <button onClick={() => scrollTo("#pricing")} className={linkClass} style={linkStyle}>
+              {lang === "pl" ? "Cennik" : "Pricing"}
+            </button>
+          </li>
+          <li>
+            <button onClick={() => scrollTo("#faq")} className={linkClass} style={linkStyle}>
+              FAQ
+            </button>
+          </li>
+          <li>
+            <button onClick={() => scrollTo("#contact")} className={linkClass} style={linkStyle}>
+              {lang === "pl" ? "Kontakt" : "Contact"}
+            </button>
+          </li>
         </ul>
 
         {/* Right controls */}
@@ -133,11 +127,7 @@ export default function Navbar() {
             <span className="mx-1 opacity-30">|</span>
             <span className={lang === "en" ? "text-primary font-semibold" : ""}>EN</span>
           </button>
-
-          <button
-            onClick={() => scrollTo("#contact")}
-            className="btn-primary text-xs py-2 px-4"
-          >
+          <button onClick={() => scrollTo("#contact")} className="btn-primary text-xs py-2 px-4">
             {t("Bezpłatna konsultacja", "Free Consultation")}
           </button>
         </div>
@@ -155,26 +145,30 @@ export default function Navbar() {
       {/* Mobile menu */}
       {menuOpen && (
         <div className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border px-4 py-5 flex flex-col gap-3">
-          {navLinks.map((link) => (
-            <button
-              key={link.href}
-              onClick={() => scrollTo(link.href)}
-              className="text-left text-sm text-muted-foreground hover:text-primary transition-colors py-1"
-            >
-              {lang === "pl" ? link.pl : link.en}
-            </button>
-          ))}
+          <button onClick={() => scrollTo("#about")} className="text-left text-sm text-muted-foreground hover:text-primary transition-colors py-1">
+            {lang === "pl" ? "O mnie" : "About"}
+          </button>
           <button
             onClick={() => scrollTo("#for-whom")}
-            className="text-left text-sm font-semibold py-1.5 px-3 rounded-sm w-fit"
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              background: "oklch(0.65 0.2 145)",
-              color: "#0a0a0a",
-              letterSpacing: "0.04em",
-            }}
+            className="text-left text-sm py-1 font-semibold"
+            style={{ color: "oklch(0.65 0.2 145)" }}
           >
             {lang === "pl" ? "Dla firm" : "For Business"}
+          </button>
+          <button onClick={() => scrollTo("#method")} className="text-left text-sm text-muted-foreground hover:text-primary transition-colors py-1">
+            {lang === "pl" ? "Metoda Cribro" : "Cribro Method"}
+          </button>
+          <button onClick={() => scrollTo("#for-whom")} className="text-left text-sm text-muted-foreground hover:text-primary transition-colors py-1">
+            {lang === "pl" ? "Dla kogo" : "For Whom"}
+          </button>
+          <button onClick={() => scrollTo("#pricing")} className="text-left text-sm text-muted-foreground hover:text-primary transition-colors py-1">
+            {lang === "pl" ? "Cennik" : "Pricing"}
+          </button>
+          <button onClick={() => scrollTo("#faq")} className="text-left text-sm text-muted-foreground hover:text-primary transition-colors py-1">
+            FAQ
+          </button>
+          <button onClick={() => scrollTo("#contact")} className="text-left text-sm text-muted-foreground hover:text-primary transition-colors py-1">
+            {lang === "pl" ? "Kontakt" : "Contact"}
           </button>
           <div className="flex items-center gap-4 pt-2">
             <button
@@ -187,10 +181,7 @@ export default function Navbar() {
               <span className={lang === "en" ? "text-primary" : ""}>EN</span>
             </button>
           </div>
-          <button
-            onClick={() => scrollTo("#contact")}
-            className="btn-primary text-center mt-2"
-          >
+          <button onClick={() => scrollTo("#contact")} className="btn-primary text-center mt-2">
             {t("Bezpłatna konsultacja", "Free Consultation")}
           </button>
         </div>
