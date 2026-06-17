@@ -2,12 +2,11 @@ import { useEffect, useRef } from "react";
 
 /**
  * useRevealAnimation
- * Obserwuje sekcję i animuje elementy z klasami:
- *   .reveal-left  → wjeżdża z lewej strony (-120px)
- *   .reveal-right → wjeżdża z prawej strony (+120px)
- *   .reveal-up    → wjeżdża z dołu (fallback)
+ * Animuje elementy z klasami reveal-left / reveal-right / reveal-up
+ * przy scrollowaniu — dopiero gdy sekcja jest dobrze widoczna (threshold 0.25).
+ * Elementy muszą mieć inline style: opacity:0, transform ustawiony w JSX.
  */
-export function useRevealAnimation(staggerMs = 100) {
+export function useRevealAnimation(staggerMs = 130) {
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -33,7 +32,9 @@ export function useRevealAnimation(staggerMs = 100) {
           observer.unobserve(entry.target);
         });
       },
-      { threshold: 0.08 }
+      // threshold 0.25 = sekcja musi być w 25% widoczna zanim animacja ruszy
+      // rootMargin ujemny = trigger dopiero gdy element jest głębiej w viewporcie
+      { threshold: 0.25, rootMargin: "0px 0px -80px 0px" }
     );
 
     observer.observe(section);
