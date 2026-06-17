@@ -4,32 +4,13 @@
    Positioned between About and Method sections
    ============================================================= */
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
+import { useRevealAnimation } from "@/hooks/useRevealAnimation";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function MyStorySection() {
   const { t } = useLanguage();
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.querySelectorAll(".reveal-story").forEach((el, i) => {
-              setTimeout(() => {
-                (el as HTMLElement).style.opacity = "1";
-                (el as HTMLElement).style.transform = "translateY(0)";
-              }, i * 150);
-            });
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
+  const sectionRef = useRevealAnimation(110);
 
   return (
     <section id="my-story" ref={sectionRef} className="py-24 bg-background relative overflow-hidden">
@@ -47,8 +28,8 @@ export default function MyStorySection() {
 
           {/* Section label */}
           <div
-            className="reveal-story mb-10"
-            style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
+            className="reveal-left mb-10"
+            style={{ opacity: 0, transform: "translateX(-120px)", transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)" }}
           >
             <p className="section-label mb-3">{t("Moja historia", "My Story")}</p>
             <h2
@@ -67,8 +48,8 @@ export default function MyStorySection() {
           <div className="space-y-7">
 
             <div
-              className="reveal-story"
-              style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
+              className="reveal-right"
+              style={{ opacity: 0, transform: "translateX(120px)", transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)" }}
             >
               <p className="text-base text-foreground leading-relaxed">
                 {t(
@@ -79,8 +60,8 @@ export default function MyStorySection() {
             </div>
 
             <div
-              className="reveal-story"
-              style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
+              className="reveal-left"
+              style={{ opacity: 0, transform: "translateX(-120px)", transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)" }}
             >
               <p className="text-base text-muted-foreground leading-relaxed">
                 {t(
@@ -92,8 +73,8 @@ export default function MyStorySection() {
 
             {/* Jenga quote block */}
             <div
-              className="reveal-story"
-              style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
+              className="reveal-right"
+              style={{ opacity: 0, transform: "translateX(120px)", transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)" }}
             >
               <div className="relative pl-6 py-4 border-l-2 border-primary/50">
                 <div className="absolute -left-1 top-4 w-2 h-2 rounded-full bg-primary/60" />
@@ -110,8 +91,8 @@ export default function MyStorySection() {
             </div>
 
             <div
-              className="reveal-story"
-              style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
+              className="reveal-left"
+              style={{ opacity: 0, transform: "translateX(-120px)", transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)" }}
             >
               <p className="text-base text-muted-foreground leading-relaxed">
                 {t(
@@ -123,8 +104,8 @@ export default function MyStorySection() {
 
             {/* Three pillars */}
             <div
-              className="reveal-story grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4"
-              style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
+              className="reveal-right grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4"
+              style={{ opacity: 0, transform: "translateX(120px)", transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)" }}
             >
               {[
                 {

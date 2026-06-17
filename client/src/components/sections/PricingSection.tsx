@@ -3,7 +3,8 @@
    Clean pricing table with 5 options
    ============================================================= */
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
+import { useRevealAnimation } from "@/hooks/useRevealAnimation";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Check } from "lucide-react";
 
@@ -43,27 +44,7 @@ const notes = [
 
 export default function PricingSection() {
   const { lang, t } = useLanguage();
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.querySelectorAll(".reveal-price").forEach((el, i) => {
-              setTimeout(() => {
-                (el as HTMLElement).style.opacity = "1";
-                (el as HTMLElement).style.transform = "translateY(0)";
-              }, i * 80);
-            });
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
+  const sectionRef = useRevealAnimation(110);
 
   return (
     <section id="pricing" ref={sectionRef} className="py-24 bg-card/30">
@@ -88,12 +69,12 @@ export default function PricingSection() {
               return (
                 <div
                   key={i}
-                  className={`reveal-price flex items-center justify-between p-5 rounded-md border transition-all ${
+                  className={`reveal-left flex items-center justify-between p-5 rounded-md border transition-all ${
                     item.highlight
                       ? "border-primary/40 bg-primary/8 shadow-sm"
                       : "border-border/60 bg-card card-glow"
                   }`}
-                  style={{ opacity: 0, transform: "translateY(12px)", transition: "opacity 0.5s ease, transform 0.5s ease, box-shadow 0.25s ease" }}
+                  style={{ opacity: 0, transform: "translateX(-120px)", transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)" }}
                 >
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
@@ -125,8 +106,8 @@ export default function PricingSection() {
 
           {/* Side notes + CTA */}
           <div
-            className="reveal-price"
-            style={{ opacity: 0, transform: "translateY(12px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
+            className="reveal-left"
+            style={{ opacity: 0, transform: "translateX(120px)", transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)" }}
           >
             <div className="bg-card rounded-sm p-6 border border-border/60">
               <h3

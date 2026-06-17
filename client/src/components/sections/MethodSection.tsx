@@ -3,7 +3,8 @@
    4 pillars of teaching method, asymmetric layout
    ============================================================= */
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
+import { useRevealAnimation } from "@/hooks/useRevealAnimation";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const ABOUT_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663586786146/TAFunkDrFdD3zZyACdoLmY/about-bg-TaevRFcopD2KaKEpjanKkc.webp";
@@ -38,27 +39,7 @@ const pillars = [
 
 export default function MethodSection() {
   const { lang, t } = useLanguage();
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.querySelectorAll(".reveal-pillar").forEach((el, i) => {
-              setTimeout(() => {
-                (el as HTMLElement).style.opacity = "1";
-                (el as HTMLElement).style.transform = "translateX(0)";
-              }, i * 100);
-            });
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
+  const sectionRef = useRevealAnimation(110);
 
   return (
     <section id="method" ref={sectionRef} className="py-24 bg-card/20">
@@ -114,8 +95,8 @@ export default function MethodSection() {
                 return (
                   <div
                     key={pillar.num}
-                    className="reveal-pillar flex gap-5 group"
-                    style={{ opacity: 0, transform: "translateX(-16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
+                    className="reveal-left flex gap-5 group"
+                    style={{ opacity: 0, transform: "translateX(-120px)", transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)" }}
                   >
                     <div className="flex-shrink-0 w-10 h-10 rounded-sm bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                       <span

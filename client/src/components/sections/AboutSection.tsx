@@ -3,7 +3,8 @@
    Personal, warm, short biography
    ============================================================= */
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
+import { useRevealAnimation } from "@/hooks/useRevealAnimation";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const PHOTO = "https://d2xsxph8kpxj0f.cloudfront.net/310519663489474725/R7k6sYKTkLq9Ymom2yutju/maciej-photo-editorial_4c075e9b.png";
@@ -16,27 +17,7 @@ const stats = [
 
 export default function AboutSection() {
   const { t } = useLanguage();
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.querySelectorAll(".reveal-about").forEach((el, i) => {
-              setTimeout(() => {
-                (el as HTMLElement).style.opacity = "1";
-                (el as HTMLElement).style.transform = "translateY(0)";
-              }, i * 120);
-            });
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
+  const sectionRef = useRevealAnimation(110);
 
   return (
     <section id="about" ref={sectionRef} className="py-24 bg-background">
@@ -61,8 +42,8 @@ export default function AboutSection() {
 
             {/* Stats */}
             <div
-              className="reveal-about grid grid-cols-3 lg:grid-cols-1 gap-4 mt-8"
-              style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
+              className="reveal-left grid grid-cols-3 lg:grid-cols-1 gap-4 mt-8"
+              style={{ opacity: 0, transform: "translateX(-120px)", transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)" }}
             >
               {stats.map((stat) => (
                 <div key={stat.num} className="border-l-2 border-primary pl-4 py-1">
@@ -85,11 +66,11 @@ export default function AboutSection() {
             <div className="space-y-6">
               {/* Photo inline — float right, rozmiar jednego akapitu */}
               <div
-                className="reveal-about float-right ml-6 mb-4 hidden sm:block"
+                className="reveal-right float-right ml-6 mb-4 hidden sm:block"
                 style={{
                   opacity: 0,
                   transform: "translateY(16px)",
-                  transition: "opacity 0.5s ease, transform 0.5s ease",
+                  transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)",
                   width: "160px",
                   flexShrink: 0,
                 }}
@@ -112,8 +93,8 @@ export default function AboutSection() {
               </div>
 
               <div
-                className="reveal-about"
-                style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
+                className="reveal-left"
+                style={{ opacity: 0, transform: "translateX(120px)", transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)" }}
               >
                 <p className="text-base text-foreground leading-relaxed">
                   {t(
@@ -124,8 +105,8 @@ export default function AboutSection() {
               </div>
 
               <div
-                className="reveal-about"
-                style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
+                className="reveal-right"
+                style={{ opacity: 0, transform: "translateX(-120px)", transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)" }}
               >
                 <p className="text-base text-muted-foreground leading-relaxed">
                   {t(
@@ -136,8 +117,8 @@ export default function AboutSection() {
               </div>
 
               <div
-                className="reveal-about"
-                style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
+                className="reveal-left"
+                style={{ opacity: 0, transform: "translateX(120px)", transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)" }}
               >
                 <p className="text-base text-muted-foreground leading-relaxed">
                   {t(
@@ -149,8 +130,8 @@ export default function AboutSection() {
 
               {/* Philosophy block */}
               <div
-                className="reveal-about border-l-2 border-primary/40 pl-5 py-2"
-                style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
+                className="reveal-right border-l-2 border-primary/40 pl-5 py-2"
+                style={{ opacity: 0, transform: "translateX(-120px)", transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)" }}
               >
                 <p
                   className="text-base text-foreground font-medium leading-relaxed italic"
@@ -172,8 +153,8 @@ export default function AboutSection() {
 
               {/* Tags */}
               <div
-                className="reveal-about flex flex-wrap gap-2 pt-2"
-                style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
+                className="reveal-left flex flex-wrap gap-2 pt-2"
+                style={{ opacity: 0, transform: "translateX(120px)", transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)" }}
               >
                 {["Business English", "Pronunciation Coach", "Cambridge Exams", "CEFR A1–C1", "Full Immersion", "ADHD-Friendly", "EdTech"].map((tag) => (
                   <span key={tag} className="tag-green">{tag}</span>
@@ -186,11 +167,11 @@ export default function AboutSection() {
 
         {/* ── ZIELONA LINIA SEPARATORA ── */}
         <div
-          className="reveal-about my-12"
+          className="reveal-right my-12"
           style={{
             opacity: 0,
             transform: "translateY(8px)",
-            transition: "opacity 0.5s ease, transform 0.5s ease",
+            transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)",
           }}
         >
           <div
@@ -215,8 +196,8 @@ export default function AboutSection() {
               </p>
             </div>
             <div
-              className="reveal-about relative inline-block"
-              style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
+              className="reveal-left relative inline-block"
+              style={{ opacity: 0, transform: "translateX(-120px)", transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)" }}
             >
               {/* Outer pulse ring */}
               <div
@@ -260,11 +241,11 @@ export default function AboutSection() {
 
             {/* Boks Cribro Labs — Aplikacje, szerokość = logo (maxWidth 260px) */}
             <div
-              className="reveal-about mt-8"
+              className="reveal-right mt-8"
               style={{
                 opacity: 0,
                 transform: "translateY(16px)",
-                transition: "opacity 0.5s ease, transform 0.5s ease",
+                transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)",
                 maxWidth: "260px",
               }}
             >
@@ -304,8 +285,8 @@ export default function AboutSection() {
           {/* Right column: opis Cribro — wyrównany z tekstem O mnie */}
           <div className="lg:col-span-8">
             <div
-              className="reveal-about space-y-4"
-              style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
+              className="reveal-left space-y-4"
+              style={{ opacity: 0, transform: "translateX(120px)", transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)" }}
             >
               <p className="text-base text-foreground leading-relaxed">
                 {t(

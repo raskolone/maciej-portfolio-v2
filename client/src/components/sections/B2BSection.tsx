@@ -52,9 +52,13 @@ const containerVariants = {
   },
 };
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 32 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.55 } },
+const cardVariantsLeft = {
+  hidden: { opacity: 0, x: -120 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
+};
+const cardVariantsRight = {
+  hidden: { opacity: 0, x: 120 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
 };
 
 export default function B2BSection() {
@@ -121,10 +125,10 @@ export default function B2BSection() {
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
         >
-          {benefits.map((b) => (
+          {benefits.map((b, idx) => (
             <motion.div
               key={b.titlePL}
-              variants={cardVariants}
+              variants={idx % 2 === 0 ? cardVariantsLeft : cardVariantsRight}
               className="group relative p-6 md:p-8 border border-primary/10 hover:border-primary/30 transition-all duration-300"
               style={{
                 background: "rgba(74,222,128,0.02)",
@@ -163,10 +167,10 @@ export default function B2BSection() {
 
         {/* CTA block */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, x: -120 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="flex flex-col md:flex-row items-center justify-between gap-8 border border-primary/20 p-8 md:p-10"
           style={{ background: "rgba(74,222,128,0.03)" }}
         >

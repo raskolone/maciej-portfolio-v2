@@ -3,7 +3,8 @@
    Cards grid showing target groups
    ============================================================= */
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
+import { useRevealAnimation } from "@/hooks/useRevealAnimation";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Briefcase, GraduationCap, Users, Globe, BookOpen, Mic, Brain } from "lucide-react";
 
@@ -47,27 +48,7 @@ const groups = [
 
 export default function ForWhomSection() {
   const { lang, t } = useLanguage();
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.querySelectorAll(".reveal-card").forEach((el, i) => {
-              setTimeout(() => {
-                (el as HTMLElement).style.opacity = "1";
-                (el as HTMLElement).style.transform = "translateY(0)";
-              }, i * 80);
-            });
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
+  const sectionRef = useRevealAnimation(110);
 
   return (
     <section id="for-whom" ref={sectionRef} className="py-24 bg-card/30">
@@ -97,8 +78,8 @@ export default function ForWhomSection() {
             return (
               <div
                 key={group.pl.title}
-                className="reveal-card card-glow bg-card rounded-sm p-6 border border-border/60"
-                style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
+                className="reveal-left card-glow bg-card rounded-sm p-6 border border-border/60"
+                style={{ opacity: 0, transform: "translateX(-120px)", transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)" }}
               >
                 <div className="w-10 h-10 rounded-sm bg-primary/10 flex items-center justify-center mb-4">
                   <Icon size={18} className="text-primary" />
