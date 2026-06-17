@@ -140,7 +140,7 @@ export default function MethodSection() {
               className="text-2xl md:text-3xl font-bold text-foreground"
               style={{ fontFamily: "'Cormorant Garamond', serif" }}
             >
-              {t("Pięć filarów mojej metody", "Five pillars of my method")}
+              {t("Sześć filarów mojej metody", "Six pillars of my method")}
             </h3>
             <div className="rule-ink mt-4 mx-auto max-w-xs" />
           </div>
