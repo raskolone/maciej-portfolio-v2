@@ -9,7 +9,7 @@ import { useRevealAnimation } from "@/hooks/useRevealAnimation";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const PHOTO = "https://d2xsxph8kpxj0f.cloudfront.net/310519663489474725/R7k6sYKTkLq9Ymom2yutju/maciej-photo-editorial_4c075e9b.png";
-const JENGA = "https://d2xsxph8kpxj0f.cloudfront.net/310519663629907879/7jNV8eTUHBABzV8jpk3RUt/jenga-scattered-8XxpFvLExNBFnZKKbfEXRD.webp";
+const JENGA = "/manus-storage/jenga-rebuild-dark_9e9dd26c.png";
 
 const stats = [
   { num: "10+", pl: "lat doświadczenia", en: "years of experience" },
@@ -317,8 +317,7 @@ export default function AboutSection() {
               aria-hidden="true"
               className="w-full h-full object-cover object-center"
               style={{
-                mixBlendMode: "lighten",
-                opacity: 0.85,
+                opacity: 0.92,
                 userSelect: "none",
                 pointerEvents: "none",
               }}
