@@ -86,13 +86,38 @@ export default function Navbar() {
         <ul className="hidden lg:flex items-center gap-7">
           {navLinks.map((link) => (
             <li key={link.href}>
-              <button
-                onClick={() => scrollTo(link.href)}
-                className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 400 }}
-              >
-                {lang === "pl" ? link.pl : link.en}
-              </button>
+              {link.href === "#for-whom" ? (
+                <>
+                  <button
+                    onClick={() => scrollTo(link.href)}
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                    style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 400 }}
+                  >
+                    {lang === "pl" ? link.pl : link.en}
+                  </button>
+                  <button
+                    onClick={() => scrollTo("#for-whom")}
+                    className="ml-3 text-xs font-semibold px-3 py-1.5 rounded-sm transition-all"
+                    style={{
+                      fontFamily: "'DM Sans', sans-serif",
+                      background: "oklch(0.65 0.2 145)",
+                      color: "#0a0a0a",
+                      letterSpacing: "0.04em",
+                      boxShadow: "0 0 10px oklch(0.65 0.2 145 / 0.4)",
+                    }}
+                  >
+                    {lang === "pl" ? "Dla firm" : "For Business"}
+                  </button>
+                </>
+              ) : (
+                <button
+                  onClick={() => scrollTo(link.href)}
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                  style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 400 }}
+                >
+                  {lang === "pl" ? link.pl : link.en}
+                </button>
+              )}
             </li>
           ))}
         </ul>
@@ -139,6 +164,18 @@ export default function Navbar() {
               {lang === "pl" ? link.pl : link.en}
             </button>
           ))}
+          <button
+            onClick={() => scrollTo("#for-whom")}
+            className="text-left text-sm font-semibold py-1.5 px-3 rounded-sm w-fit"
+            style={{
+              fontFamily: "'DM Sans', sans-serif",
+              background: "oklch(0.65 0.2 145)",
+              color: "#0a0a0a",
+              letterSpacing: "0.04em",
+            }}
+          >
+            {lang === "pl" ? "Dla firm" : "For Business"}
+          </button>
           <div className="flex items-center gap-4 pt-2">
             <button
               onClick={toggleLang}

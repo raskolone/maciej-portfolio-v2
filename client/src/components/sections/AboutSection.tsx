@@ -320,6 +320,10 @@ export default function AboutSection() {
                 opacity: 0.92,
                 userSelect: "none",
                 pointerEvents: "none",
+                maskImage: "linear-gradient(to right, transparent 0%, black 35%, black 65%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)",
+                maskComposite: "intersect",
+                WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 35%, black 65%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)",
+                WebkitMaskComposite: "source-in",
               }}
             />
           </div>
