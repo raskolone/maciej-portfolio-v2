@@ -10,7 +10,7 @@ import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { href: "#about",    pl: "O mnie",   en: "About" },
-  { href: "#method",   pl: "Metoda",   en: "Method" },
+  { href: "#method",   pl: "Metoda Cribro",   en: "Cribro Method" },
   { href: "#pricing",  pl: "Cennik",   en: "Pricing" },
   { href: "#faq",      pl: "FAQ",      en: "FAQ" },
   { href: "#contact",  pl: "Kontakt",  en: "Contact" },
