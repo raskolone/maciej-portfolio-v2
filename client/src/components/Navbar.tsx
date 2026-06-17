@@ -94,15 +94,6 @@ export default function Navbar() {
               </button>
             </li>
           ))}
-          <li>
-            <button
-              onClick={() => scrollTo("#b2b")}
-              className="text-xs tracking-wide px-3 py-1.5 rounded border border-primary bg-primary/10 text-primary hover:bg-primary/20 transition-all font-semibold"
-              style={{ fontFamily: "'DM Sans', sans-serif" }}
-            >
-              {t("DLA FIRM", "FOR BUSINESS")}
-            </button>
-          </li>
         </ul>
 
         {/* Right controls */}

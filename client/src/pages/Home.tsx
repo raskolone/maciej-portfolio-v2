@@ -13,7 +13,6 @@ import MyStorySection from "@/components/sections/MyStorySection";
 import PricingSection from "@/components/sections/PricingSection";
 import FAQSection from "@/components/sections/FAQSection";
 import ContactSection from "@/components/sections/ContactSection";
-import B2BSection from "@/components/sections/B2BSection";
 
 export default function Home() {
   return (
@@ -21,7 +20,6 @@ export default function Home() {
       <Navbar />
       <main>
         <HeroSection />
-        <B2BSection />
         <ForWhomSection />
         <MethodSection />
         <AboutSection />
