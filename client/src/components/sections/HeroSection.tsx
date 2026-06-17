@@ -6,7 +6,7 @@
    ============================================================= */
 
 import { useLanguage } from "@/contexts/LanguageContext";
-import GridCanvas from "@/components/GridCanvas";
+import ConstellationCanvas from "@/components/ConstellationCanvas";
 import TypewriterText from "@/components/TypewriterText";
 
 const AVATAR = "/manus-storage/maciej-hero-new_e2364866.webp";
@@ -23,8 +23,8 @@ export default function HeroSection() {
       id="hero"
       className="relative min-h-screen flex items-center overflow-hidden bg-background"
     >
-      {/* Animated grid blocks background */}
-      <GridCanvas />
+      {/* Constellation background — calm autonomous drift, no cursor interaction */}
+      <ConstellationCanvas />
 
       {/* Subtle radial gradient overlay */}
       <div
@@ -184,12 +184,22 @@ export default function HeroSection() {
                 }}
               />
 
+              {/* White pulse glow ring around photo */}
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  borderRadius: "2px",
+                  boxShadow: "0 0 0 1px rgba(255,255,255,0.12), 0 0 24px 4px rgba(255,255,255,0.07), 0 0 60px 12px rgba(255,255,255,0.04)",
+                  animation: "photoPulse 3.5s ease-in-out infinite",
+                }}
+              />
+
               {/* Photo — smaller, portrait crop */}
               <div
                 className="w-56 h-72 md:w-72 md:h-96 overflow-hidden"
                 style={{
-                  border: "1px solid rgba(74,222,128,0.2)",
-                  boxShadow: "0 0 40px rgba(74,222,128,0.08), 0 20px 60px rgba(0,0,0,0.5)",
+                  border: "1px solid rgba(255,255,255,0.15)",
+                  boxShadow: "0 0 0 1px rgba(255,255,255,0.06), 0 20px 60px rgba(0,0,0,0.6)",
                 }}
               >
                 <img

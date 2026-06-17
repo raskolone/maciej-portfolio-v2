@@ -19,8 +19,7 @@ interface Star {
 }
 
 const CONNECTION_DIST = 160;
-const MOUSE_DIST = 220;
-const PARALLAX_STRENGTH = 0.04; // how much mouse shifts layers
+const PARALLAX_STRENGTH = 0.0; // no mouse parallax — calm autonomous movement
 
 export default function ConstellationCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -56,14 +55,7 @@ export default function ConstellationCanvas() {
     resize();
     window.addEventListener("resize", resize);
 
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      mouseRef.current = {
-        x: (e.clientX - rect.left) / canvas.width,
-        y: (e.clientY - rect.top) / canvas.height,
-      };
-    };
-    window.addEventListener("mousemove", handleMouseMove);
+    // No mouse interaction — stars drift autonomously
 
     const draw = () => {
       const W = canvas.width;
@@ -113,23 +105,7 @@ export default function ConstellationCanvas() {
           }
         }
 
-        // Mouse connections — bright green, only near stars
-        if (stars[i].z > 0.3) {
-          const mdx = pi.px - mx * W - W / 2;
-          const mdy = pi.py - my * H - H / 2;
-          const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
-          if (mdist < MOUSE_DIST) {
-            const alpha = (1 - mdist / MOUSE_DIST) * 0.7 * stars[i].z;
-            ctx.beginPath();
-            ctx.moveTo(pi.px, pi.py);
-            ctx.lineTo(mx * W + W / 2, my * H + H / 2);
-            ctx.strokeStyle = isDark
-              ? `rgba(100, 230, 140, ${alpha})`
-              : `rgba(20, 110, 50, ${alpha})`;
-            ctx.lineWidth = 1.0;
-            ctx.stroke();
-          }
-        }
+        // No mouse connections — calm autonomous drift only
       }
 
       // Draw stars
@@ -182,7 +158,7 @@ export default function ConstellationCanvas() {
     return () => {
       cancelAnimationFrame(animRef.current);
       window.removeEventListener("resize", resize);
-      window.removeEventListener("mousemove", handleMouseMove);
+      // no mousemove listener to remove
     };
   }, [theme]);
 
