@@ -4,32 +4,12 @@
    Positioned between About and Method sections
    ============================================================= */
 
-import { useEffect, useRef } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useRevealAnimation } from "@/hooks/useRevealAnimation";
 
 export default function MyStorySection() {
   const { t } = useLanguage();
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.querySelectorAll(".reveal-story").forEach((el, i) => {
-              setTimeout(() => {
-                (el as HTMLElement).style.opacity = "1";
-                (el as HTMLElement).style.transform = "translateY(0)";
-              }, i * 150);
-            });
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
+  const sectionRef = useRevealAnimation(120);
 
   return (
     <section id="my-story" ref={sectionRef} className="py-24 bg-background relative overflow-hidden">
@@ -46,10 +26,7 @@ export default function MyStorySection() {
         <div className="max-w-3xl mx-auto">
 
           {/* Section label */}
-          <div
-            className="reveal-story mb-10"
-            style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
-          >
+          <div className="reveal-left mb-10">
             <p className="section-label mb-3">{t("Moja historia", "My Story")}</p>
             <h2
               className="text-3xl md:text-4xl font-bold text-foreground leading-tight"
@@ -66,10 +43,7 @@ export default function MyStorySection() {
           {/* Story paragraphs */}
           <div className="space-y-7">
 
-            <div
-              className="reveal-story"
-              style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
-            >
+            <div className="reveal-left">
               <p className="text-base text-foreground leading-relaxed">
                 {t(
                   "Znam to uczucie, kiedy wieża się wali. Kiedy wyciągasz jeden klocek za dużo i całość leci w dół — głośno, chaotycznie, bez ostrzeżenia. Przez lata mierzyłem się z trudnościami zdrowotnymi, psychicznymi i emocjonalnymi, które sprawiały, że musiałem uczyć się układać swoje życie od nowa. Nie raz. Kilka razy.",
@@ -78,10 +52,7 @@ export default function MyStorySection() {
               </p>
             </div>
 
-            <div
-              className="reveal-story"
-              style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
-            >
+            <div className="reveal-right">
               <p className="text-base text-muted-foreground leading-relaxed">
                 {t(
                   "ADHD to nie wymówka. To rzeczywistość, z którą żyję każdego dnia. Mózg, który myśli szybciej niż mówi, gubi wątki, skacze między pomysłami i nie znosi chaosu — a jednocześnie potrafi skupić się z laserową precyzją na tym, co go naprawdę pochłania. Nauczyłem się z tym pracować, nie walczyć.",
@@ -91,10 +62,7 @@ export default function MyStorySection() {
             </div>
 
             {/* Jenga quote block */}
-            <div
-              className="reveal-story"
-              style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
-            >
+            <div className="reveal-left">
               <div className="relative pl-6 py-4 border-l-2 border-primary/50">
                 <div className="absolute -left-1 top-4 w-2 h-2 rounded-full bg-primary/60" />
                 <p
@@ -109,10 +77,7 @@ export default function MyStorySection() {
               </div>
             </div>
 
-            <div
-              className="reveal-story"
-              style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
-            >
+            <div className="reveal-right">
               <p className="text-base text-muted-foreground leading-relaxed">
                 {t(
                   "Dziś uczę angielskiego — i robię to z pełną świadomością, że po drugiej stronie ekranu często siedzi ktoś, kto też walczy. Z brakiem pewności siebie, z chaosem w głowie, z poczuciem, że jest za późno albo za trudno. Dlatego nie uczę tylko języka. Uczę systemu. Małych kroków. Konsekwencji, która daje efekty.",
@@ -122,10 +87,7 @@ export default function MyStorySection() {
             </div>
 
             {/* Three pillars */}
-            <div
-              className="reveal-story grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4"
-              style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
-            >
+            <div className="reveal-up grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
               {[
                 {
                   pl: { label: "Przetrwałem", desc: "Wiem, co znaczy zaczynać od zera." },

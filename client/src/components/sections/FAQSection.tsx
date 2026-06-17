@@ -5,6 +5,7 @@
 
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useRevealAnimation } from "@/hooks/useRevealAnimation";
 import { ChevronDown } from "lucide-react";
 
 const faqs = [
@@ -93,13 +94,14 @@ const faqs = [
 export default function FAQSection() {
   const { lang, t } = useLanguage();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const sectionRef = useRevealAnimation(80);
 
   return (
-    <section id="faq" className="py-24 bg-background">
+    <section id="faq" ref={sectionRef} className="py-24 bg-background">
       <div className="container">
         <div className="grid lg:grid-cols-12 gap-12">
           {/* Left: heading */}
-          <div className="lg:col-span-4">
+          <div className="reveal-left lg:col-span-4">
             <div className="relative">
               <span className="deco-number">06</span>
               <p className="section-label mb-3">{t("Pytania", "Questions")}</p>
@@ -127,7 +129,7 @@ export default function FAQSection() {
           </div>
 
           {/* Right: accordion */}
-          <div className="lg:col-span-8">
+          <div className="reveal-right lg:col-span-8">
             <div className="space-y-2">
               {faqs.map((faq, i) => {
                 const data = lang === "pl" ? faq.pl : faq.en;

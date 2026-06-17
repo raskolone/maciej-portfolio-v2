@@ -1,10 +1,11 @@
 /* =============================================================
-   DESIGN: Dark Constellation — B2B Section
+   DESIGN: Dark Asymmetric B2B — B2B Section
    Landing section for corporate clients
-   Dark editorial, green accent, Cormorant + DM Sans
+   Animations: useRevealAnimation — strong left/right slide-in
    ============================================================= */
+import React from "react";
+import { useRevealAnimation } from "@/hooks/useRevealAnimation";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { motion } from "framer-motion";
 
 const benefits = [
   {
@@ -15,6 +16,7 @@ const benefits = [
       "Żadnych tłumaczeń. Żadnych skrótów. Tylko angielski od pierwszej minuty — metoda, która działa na neuroróżnorodne mózgi i zapracowanych menedżerów.",
     descEN:
       "No translations. No shortcuts. English only from minute one — a method that works for neurodivergent minds and busy managers.",
+    side: "left",
   },
   {
     icon: "◉",
@@ -24,6 +26,7 @@ const benefits = [
       "Regularny feedback dla działu HR: postępy, frekwencja, poziom zaawansowania. Transparentność, którą docenią Twoi przełożeni.",
     descEN:
       "Regular feedback for HR: progress, attendance, proficiency level. Transparency your management will appreciate.",
+    side: "right",
   },
   {
     icon: "◎",
@@ -33,6 +36,7 @@ const benefits = [
       "Pełna dokumentacja B2B: faktury VAT, możliwość rozliczenia jako koszt firmowy. Zero biurokracji po Twojej stronie.",
     descEN:
       "Full B2B documentation: VAT invoices, deductible as business expense. Zero bureaucracy on your side.",
+    side: "left",
   },
   {
     icon: "◇",
@@ -42,34 +46,18 @@ const benefits = [
       "Lekcje online dla całego zespołu — niezależnie od lokalizacji. Harmonogram dopasowany do rytmu pracy firmy.",
     descEN:
       "Online lessons for your entire team — regardless of location. Schedule aligned with your company's work rhythm.",
+    side: "right",
   },
 ];
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.12 },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, x: -32 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.55,
-      ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
-    },
-  },
-};
-
 export default function B2BSection() {
   const { t } = useLanguage();
+  const sectionRef = useRevealAnimation(110);
 
   return (
     <section
       id="b2b"
+      ref={sectionRef as React.RefObject<HTMLElement>}
       className="relative py-24 md:py-32 overflow-hidden"
       style={{ scrollMarginTop: "80px" }}
     >
@@ -94,13 +82,13 @@ export default function B2BSection() {
         {/* Header */}
         <div className="mb-16 md:mb-20">
           <p
-            className="text-primary text-xs tracking-[0.35em] uppercase mb-3"
+            className="reveal-left text-primary text-xs tracking-[0.35em] uppercase mb-3"
             style={{ fontFamily: "'DM Mono', monospace" }}
           >
             {t("dla firm", "for business")}
           </p>
           <h2
-            className="text-4xl md:text-6xl font-bold text-foreground leading-tight mb-6"
+            className="reveal-left text-4xl md:text-6xl font-bold text-foreground leading-tight mb-6"
             style={{ fontFamily: "'Cormorant Garamond', serif" }}
           >
             {t(
@@ -108,9 +96,9 @@ export default function B2BSection() {
               "Why does your company\nneed Cribro?"
             )}
           </h2>
-          <div className="h-px w-16 bg-primary/60 mb-6" />
+          <div className="reveal-left h-px w-16 bg-primary/60 mb-6" />
           <p
-            className="text-muted-foreground text-base md:text-lg max-w-2xl leading-relaxed"
+            className="reveal-right text-muted-foreground text-base md:text-lg max-w-2xl leading-relaxed"
             style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
             {t(
@@ -121,18 +109,11 @@ export default function B2BSection() {
         </div>
 
         {/* Benefits grid */}
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
           {benefits.map((b) => (
-            <motion.div
+            <div
               key={b.titlePL}
-              variants={cardVariants}
-              className="group relative p-6 md:p-8 border border-primary/10 hover:border-primary/30 transition-all duration-300"
+              className={`${b.side === "left" ? "reveal-left" : "reveal-right"} group relative p-6 md:p-8 border border-primary/10 hover:border-primary/30 transition-all duration-300`}
               style={{
                 background: "rgba(74,222,128,0.02)",
                 backdropFilter: "blur(4px)",
@@ -164,17 +145,13 @@ export default function B2BSection() {
                   </p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
 
         {/* CTA block */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="flex flex-col md:flex-row items-center justify-between gap-8 border border-primary/20 p-8 md:p-10"
+        <div
+          className="reveal-up flex flex-col md:flex-row items-center justify-between gap-8 border border-primary/20 p-8 md:p-10"
           style={{ background: "rgba(74,222,128,0.03)" }}
         >
           <div>
@@ -202,7 +179,7 @@ export default function B2BSection() {
           >
             {t("Umów konsultację biznesową", "Book Business Consultation")}
           </a>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
