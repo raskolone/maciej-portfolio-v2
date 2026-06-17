@@ -9,7 +9,6 @@ import HeroSection from "@/components/sections/HeroSection";
 import ForWhomSection from "@/components/sections/ForWhomSection";
 import MethodSection from "@/components/sections/MethodSection";
 import AboutSection from "@/components/sections/AboutSection";
-import MyStorySection from "@/components/sections/MyStorySection";
 import PricingSection from "@/components/sections/PricingSection";
 import FAQSection from "@/components/sections/FAQSection";
 import ContactSection from "@/components/sections/ContactSection";
@@ -23,7 +22,6 @@ export default function Home() {
         <ForWhomSection />
         <MethodSection />
         <AboutSection />
-        <MyStorySection />
         <PricingSection />
         <FAQSection />
         <ContactSection />

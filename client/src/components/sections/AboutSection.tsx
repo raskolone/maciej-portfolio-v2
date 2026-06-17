@@ -1,12 +1,15 @@
 /* =============================================================
-   DESIGN: Warm Ink & Paper — About Section
-   Personal, warm, short biography
+   DESIGN: Warm Ink & Paper — About + My Story (merged)
+   Upper: "O mnie" — photo inline, titles, bio
+   Separator: green gradient line
+   Lower: "Moja Historia" — text left (7 cols), Jenga image right (5 cols)
    ============================================================= */
 
 import { useRevealAnimation } from "@/hooks/useRevealAnimation";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const PHOTO = "https://d2xsxph8kpxj0f.cloudfront.net/310519663489474725/R7k6sYKTkLq9Ymom2yutju/maciej-photo-editorial_4c075e9b.png";
+const JENGA = "https://d2xsxph8kpxj0f.cloudfront.net/310519663629907879/7jNV8eTUHBABzV8jpk3RUt/jenga-scattered-8XxpFvLExNBFnZKKbfEXRD.webp";
 
 const stats = [
   { num: "10+", pl: "lat doświadczenia", en: "years of experience" },
@@ -19,10 +22,10 @@ export default function AboutSection() {
   const sectionRef = useRevealAnimation(110);
 
   return (
-    <section id="about" ref={sectionRef} className="py-24 bg-background">
+    <section id="about" ref={sectionRef} className="py-24 bg-background overflow-hidden">
       <div className="container">
 
-        {/* ── SEKCJA O MNIE ── */}
+        {/* ── GÓRNA CZĘŚĆ: O MNIE ── */}
         <div className="grid lg:grid-cols-12 gap-12 items-start">
 
           {/* Left column: label + heading + stats */}
@@ -63,7 +66,7 @@ export default function AboutSection() {
           {/* Right column: bio text */}
           <div className="lg:col-span-8">
             <div className="space-y-6">
-              {/* Photo inline — float right, rozmiar jednego akapitu */}
+              {/* Photo inline — float right, prostokątne, wcięte w tekst */}
               <div
                 className="reveal-right float-right ml-6 mb-4 hidden sm:block"
                 style={{
@@ -149,7 +152,6 @@ export default function AboutSection() {
                 </p>
               </div>
 
-
               {/* Tags */}
               <div
                 className="reveal-left flex flex-wrap gap-2 pt-2"
@@ -164,9 +166,9 @@ export default function AboutSection() {
           </div>
         </div>
 
-        {/* ── ZIELONA LINIA SEPARATORA ── */}
+        {/* ── SEPARATOR: zielona linia gradientowa ── */}
         <div
-          className="reveal-right my-12"
+          className="reveal-right my-16"
           style={{
             opacity: 0,
             transform: "translateY(8px)",
@@ -181,6 +183,150 @@ export default function AboutSection() {
             }}
           />
         </div>
+
+        {/* ── DOLNA CZĘŚĆ: MOJA HISTORIA ── */}
+        <div className="grid lg:grid-cols-12 gap-0 items-stretch">
+
+          {/* Left: text (7 cols) */}
+          <div className="lg:col-span-7 space-y-7 pr-0 lg:pr-10">
+
+            {/* Heading */}
+            <div
+              className="reveal-left"
+              style={{ opacity: 0, transform: "translateX(-120px)", transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)" }}
+            >
+              <p className="section-label mb-3">{t("Moja historia", "My Story")}</p>
+              <h2
+                className="text-3xl md:text-4xl font-bold text-foreground leading-tight"
+                style={{ fontFamily: "'Cormorant Garamond', serif" }}
+              >
+                {t(
+                  "Klocki Jenga i sztuka układania ich od nowa.",
+                  "Jenga blocks and the art of putting them back together."
+                )}
+              </h2>
+              <div className="rule-ink mt-6 max-w-xs" />
+            </div>
+
+            <div
+              className="reveal-right"
+              style={{ opacity: 0, transform: "translateX(120px)", transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)" }}
+            >
+              <p className="text-base text-foreground leading-relaxed">
+                {t(
+                  "Znam to uczucie, kiedy wieża się wali. Kiedy wyciągasz jeden klocek za dużo i całość leci w dół — głośno, chaotycznie, bez ostrzeżenia. Przez lata mierzyłem się z trudnościami zdrowotnymi, psychicznymi i emocjonalnymi, które sprawiały, że musiałem uczyć się układać swoje życie od nowa. Nie raz. Kilka razy.",
+                  "I know that feeling — when the tower falls. When you pull one block too many and everything crashes down — loudly, chaotically, without warning. For years I faced health, mental, and emotional challenges that forced me to learn how to rebuild my life from scratch. Not once. Several times."
+                )}
+              </p>
+            </div>
+
+            <div
+              className="reveal-left"
+              style={{ opacity: 0, transform: "translateX(-120px)", transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)" }}
+            >
+              <p className="text-base text-muted-foreground leading-relaxed">
+                {t(
+                  "ADHD to nie wymówka. To rzeczywistość, z którą żyję każdego dnia. Mózg, który myśli szybciej niż mówi, gubi wątki, skacze między pomysłami i nie znosi chaosu — a jednocześnie potrafi skupić się z laserową precyzją na tym, co go naprawdę pochłania. Nauczyłem się z tym pracować, nie walczyć.",
+                  "ADHD is not an excuse. It's a reality I live with every day. A brain that thinks faster than it speaks, loses threads, jumps between ideas, and can't stand chaos — yet can focus with laser precision on what truly absorbs it. I learned to work with it, not against it."
+                )}
+              </p>
+            </div>
+
+            {/* Jenga quote block */}
+            <div
+              className="reveal-right"
+              style={{ opacity: 0, transform: "translateX(120px)", transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)" }}
+            >
+              <div className="relative pl-6 py-4 border-l-2 border-primary/50">
+                <div className="absolute -left-1 top-4 w-2 h-2 rounded-full bg-primary/60" />
+                <p
+                  className="text-lg md:text-xl text-foreground font-medium leading-relaxed italic"
+                  style={{ fontFamily: "'Cormorant Garamond', serif" }}
+                >
+                  {t(
+                    "\"Klocki Jenga zawsze można poukładać od nowa. Pytanie nie brzmi: czy wieża upadnie? Pytanie brzmi: czy wiesz, jak ją zbudować lepiej niż poprzednio?\"",
+                    "\"Jenga blocks can always be stacked again. The question isn't: will the tower fall? The question is: do you know how to build it better than before?\""
+                  )}
+                </p>
+              </div>
+            </div>
+
+            <div
+              className="reveal-left"
+              style={{ opacity: 0, transform: "translateX(-120px)", transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)" }}
+            >
+              <p className="text-base text-muted-foreground leading-relaxed">
+                {t(
+                  "Dziś uczę angielskiego — i robię to z pełną świadomością, że po drugiej stronie ekranu często siedzi ktoś, kto też walczy. Z brakiem pewności siebie, z chaosem w głowie, z poczuciem, że jest za późno albo za trudno. Dlatego nie uczę tylko języka. Uczę systemu. Małych kroków. Konsekwencji, która daje efekty.",
+                  "Today I teach English — and I do it with full awareness that on the other side of the screen there's often someone who is also struggling. With lack of confidence, with chaos in their head, with the feeling that it's too late or too hard. That's why I don't just teach language. I teach a system. Small steps. Consistency that delivers results."
+                )}
+              </p>
+            </div>
+
+            {/* Three pillars */}
+            <div
+              className="reveal-right grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4"
+              style={{ opacity: 0, transform: "translateX(120px)", transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)" }}
+            >
+              {[
+                {
+                  pl: { label: "Przetrwałem", desc: "Wiem, co znaczy zaczynać od zera." },
+                  en: { label: "I survived", desc: "I know what it means to start from scratch." },
+                },
+                {
+                  pl: { label: "Odbudowałem", desc: "Klocek po klocku. Dzień po dniu." },
+                  en: { label: "I rebuilt", desc: "Block by block. Day by day." },
+                },
+                {
+                  pl: { label: "Uczę innych", desc: "Jak budować lepiej niż poprzednio." },
+                  en: { label: "I teach others", desc: "How to build better than before." },
+                },
+              ].map((item) => (
+                <div
+                  key={item.pl.label}
+                  className="bg-card/40 border border-border/50 rounded-sm p-5 text-center"
+                >
+                  <p
+                    className="text-xl font-bold text-primary mb-1"
+                    style={{ fontFamily: "'Cormorant Garamond', serif" }}
+                  >
+                    {t(item.pl.label, item.en.label)}
+                  </p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    {t(item.pl.desc, item.en.desc)}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+          </div>
+
+          {/* Right: Jenga image (5 cols) — element tła, bez ramki, mix-blend-mode lighten */}
+          <div
+            className="reveal-right hidden lg:flex lg:col-span-5 items-stretch relative"
+            style={{
+              opacity: 0,
+              transform: "translateX(120px)",
+              transition: "opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1)",
+              minHeight: "100%",
+            }}
+          >
+            <img
+              src={JENGA}
+              alt=""
+              aria-hidden="true"
+              className="w-full h-full object-cover object-center"
+              style={{
+                mixBlendMode: "lighten",
+                opacity: 0.85,
+                userSelect: "none",
+                pointerEvents: "none",
+              }}
+            />
+          </div>
+
+        </div>
+
       </div>
     </section>
   );
