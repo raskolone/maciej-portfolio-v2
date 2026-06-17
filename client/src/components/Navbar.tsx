@@ -108,14 +108,12 @@ export default function Navbar() {
             <span className={lang === "en" ? "text-primary font-semibold" : ""}>EN</span>
           </button>
 
-          <a
-            href="https://calendly.com/maciej-wyrozumski/30min"
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={() => scrollTo("#contact")}
             className="btn-primary text-xs py-2 px-4"
           >
             {t("Bezpłatna konsultacja", "Free Consultation")}
-          </a>
+          </button>
         </div>
 
         {/* Mobile hamburger */}
@@ -151,14 +149,12 @@ export default function Navbar() {
               <span className={lang === "en" ? "text-primary" : ""}>EN</span>
             </button>
           </div>
-          <a
-            href="https://calendly.com/maciej-wyrozumski/30min"
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={() => scrollTo("#contact")}
             className="btn-primary text-center mt-2"
           >
-            {t("Umów lekcję", "Book a lesson")}
-          </a>
+            {t("Bezpłatna konsultacja", "Free Consultation")}
+          </button>
         </div>
       )}
     </nav>

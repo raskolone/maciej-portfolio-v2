@@ -119,20 +119,14 @@ export default function HeroSection() {
 
         {/* CTA buttons */}
         <div
-          className="animate-fade-in-up flex flex-col sm:flex-row gap-3 mb-12"
+          className="animate-fade-in-up flex justify-center mb-12"
           style={{ opacity: 0, animationDelay: "0.75s", animationFillMode: "forwards" }}
         >
           <button
             onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
-            className="btn-primary"
+            className="btn-primary animate-cta-pulse"
           >
             {t("Umów bezpłatną konsultację", "Book Free Consultation")}
-          </button>
-          <button
-            onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
-            className="btn-secondary"
-          >
-            {t("Napisz do mnie", "Contact Me")}
           </button>
         </div>
 
