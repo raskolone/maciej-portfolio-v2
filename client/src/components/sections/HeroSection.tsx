@@ -14,8 +14,8 @@ export default function HeroSection() {
   const { lang, t } = useLanguage();
 
   const phrases = lang === "pl"
-    ? ["Business English Expert", "Pronunciation Coach", "Full Immersion Trainer", "ADHD-Friendly Educator"]
-    : ["Business English Expert", "Pronunciation Coach", "Full Immersion Trainer", "ADHD-Friendly Educator"];
+    ? ["Business English dla firm", "The Cribro Method", "Full Immersion Trainer", "ADHD-Friendly Educator"]
+    : ["Business English for Companies", "The Cribro Method", "Full Immersion Trainer", "ADHD-Friendly Educator"];
 
   return (
     <section

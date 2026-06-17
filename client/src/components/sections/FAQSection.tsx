@@ -88,6 +88,16 @@ const faqs = [
       a: "Yes, I run lessons in pairs and small groups (2–4 people). The price is set individually depending on the number of participants and the format.",
     },
   },
+  {
+    pl: {
+      q: "Jak wygląda raportowanie postępów dla działu HR?",
+      a: "Po każdym miesiącu przygotowuję krótkie podsumowanie dla firmy: poziom uczestnika, zrealizowane tematy, obszary do pracy i rekomendacje na kolejny miesiąc. Raport jest dostosowany do potrzeb działu HR lub managera — bez zbędnej biurokracji, tylko konkrety.",
+    },
+    en: {
+      q: "How does progress reporting work for HR departments?",
+      a: "After each month, I prepare a short summary for the company: participant level, topics covered, areas to work on, and recommendations for the next month. The report is tailored to the needs of the HR department or manager — no unnecessary bureaucracy, just the essentials.",
+    },
+  },
 ];
 
 export default function FAQSection() {
