@@ -1,13 +1,38 @@
 /* =============================================================
-   DESIGN: Warm Ink & Paper — Pricing Section
-   Clean pricing table with 5 options
+   DESIGN: Dark Constellation — Pricing Section
+   Tabs: Dla firm | Dla osób indywidualnych
    ============================================================= */
 
-import { useRevealAnimation } from "@/hooks/useRevealAnimation";
+import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Check } from "lucide-react";
 
-const pricingItems = [
+const businessPricing = [
+  {
+    pl: { name: "Pakiet Indywidualny B2B", duration: "4 × 60 min/mies.", price: "560 zł/mies.", note: "1 pracownik — materiały + raport HR + faktura VAT" },
+    en: { name: "B2B Individual Package", duration: "4 × 60 min/mo.", price: "PLN 560/mo.", note: "1 employee — materials + HR report + VAT invoice" },
+    highlight: true,
+  },
+  {
+    pl: { name: "Pakiet Zespołowy", duration: "4 × 60 min/mies.", price: "od 200 zł/os./mies.", note: "2–4 osoby — materiały branżowe + raport HR + faktura VAT" },
+    en: { name: "Team Package", duration: "4 × 60 min/mo.", price: "from PLN 200/person/mo.", note: "2–4 people — industry materials + HR report + VAT invoice" },
+    highlight: false,
+  },
+  {
+    pl: { name: "Pakiet Korporacyjny", duration: "wycena indywidualna", price: "od 150 zł/os./mies.", note: "5+ osób — analiza potrzeb + raporty kwartalne + faktura VAT" },
+    en: { name: "Corporate Package", duration: "custom quote", price: "from PLN 150/person/mo.", note: "5+ people — needs analysis + quarterly reports + VAT invoice" },
+    highlight: false,
+  },
+];
+
+const businessNotes = [
+  { pl: "Faktura VAT — koszt firmowy, odliczenie od podatku", en: "VAT invoice — deductible business expense" },
+  { pl: "Raport HR co miesiąc — mierzalne efekty", en: "Monthly HR report — measurable results" },
+  { pl: "Materiały branżowe dopasowane do firmy", en: "Industry materials tailored to your company" },
+  { pl: "Elastyczne terminy — online bez kosztów dojazdu", en: "Flexible schedule — online, no travel costs" },
+];
+
+const individualPricing = [
   {
     pl: { name: "Lekcja indywidualna online", duration: "60 min", price: "120 zł", note: "Najczęściej wybierana" },
     en: { name: "Individual lesson online", duration: "60 min", price: "PLN 120", note: "Most popular" },
@@ -23,19 +48,9 @@ const pricingItems = [
     en: { name: "4-lesson online package", duration: "4 × 60 min", price: "PLN 400", note: "Save PLN 80" },
     highlight: false,
   },
-  {
-    pl: { name: "Business English / specjalistyczne", duration: "60 min", price: "140 zł", note: "Firmy, negocjacje, prezentacje" },
-    en: { name: "Business English / specialist", duration: "60 min", price: "PLN 140", note: "Companies, negotiations, presentations" },
-    highlight: false,
-  },
-  {
-    pl: { name: "Angielski dla firm / tłumaczenia", duration: "wycena", price: "indywidualnie", note: "Wycena indywidualna" },
-    en: { name: "Corporate English / translations", duration: "quote", price: "individual", note: "Custom quote" },
-    highlight: false,
-  },
 ];
 
-const notes = [
+const individualNotes = [
   { pl: "Materiały dydaktyczne w cenie", en: "Teaching materials included" },
   { pl: "Zajęcia online i stacjonarnie", en: "Online and in-person available" },
   { pl: "Terminy ustalane indywidualnie", en: "Schedule arranged individually" },
@@ -43,12 +58,16 @@ const notes = [
 
 export default function PricingSection() {
   const { lang, t } = useLanguage();
-  const sectionRef = useRevealAnimation(110);
+  const [activeTab, setActiveTab] = useState<"business" | "individual">("business");
+
+  const pricingItems = activeTab === "business" ? businessPricing : individualPricing;
+  const notes = activeTab === "business" ? businessNotes : individualNotes;
 
   return (
-    <section id="pricing" ref={sectionRef} className="py-24 bg-card/30">
+    <section id="pricing" className="py-24 bg-card/30">
       <div className="container">
-        <div className="relative mb-14">
+        {/* Header */}
+        <div className="relative mb-10">
           <span className="deco-number">05</span>
           <p className="section-label mb-3">{t("Cennik", "Pricing")}</p>
           <h2
@@ -60,20 +79,49 @@ export default function PricingSection() {
           <div className="rule-ink mt-6 max-w-xs" />
         </div>
 
+        {/* Tabs */}
+        <div className="flex gap-2 mb-10">
+          <button
+            onClick={() => setActiveTab("business")}
+            className={`px-5 py-2.5 text-sm font-semibold rounded-sm border transition-all duration-200 ${
+              activeTab === "business"
+                ? "bg-primary text-background border-primary"
+                : "bg-transparent text-muted-foreground border-border/60 hover:border-primary/40 hover:text-foreground"
+            }`}
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
+            {t("Dla firm", "For Companies")}
+          </button>
+          <button
+            onClick={() => setActiveTab("individual")}
+            className={`px-5 py-2.5 text-sm font-semibold rounded-sm border transition-all duration-200 ${
+              activeTab === "individual"
+                ? "bg-primary text-background border-primary"
+                : "bg-transparent text-muted-foreground border-border/60 hover:border-primary/40 hover:text-foreground"
+            }`}
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
+            {t("Dla osób indywidualnych", "For Individuals")}
+          </button>
+        </div>
+
         <div className="grid lg:grid-cols-3 gap-8 items-start">
-          {/* Pricing table */}
+          {/* Pricing list */}
           <div className="lg:col-span-2 space-y-3">
             {pricingItems.map((item, i) => {
               const data = lang === "pl" ? item.pl : item.en;
               return (
                 <div
-                  key={i}
-                  className={`reveal-left flex items-center justify-between p-5 rounded-md border transition-all ${
+                  key={`${activeTab}-${i}`}
+                  className={`flex items-center justify-between p-5 rounded-md border transition-all ${
                     item.highlight
                       ? "border-primary/40 bg-primary/8 shadow-sm"
                       : "border-border/60 bg-card card-glow"
                   }`}
-                  style={{ opacity: 0, transform: "translateX(-120px)", transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)" }}
+                  style={{
+                    animation: `fadeInUp 0.4s cubic-bezier(0.22,1,0.36,1) both`,
+                    animationDelay: `${i * 80}ms`,
+                  }}
                 >
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
@@ -105,8 +153,10 @@ export default function PricingSection() {
 
           {/* Side notes + CTA */}
           <div
-            className="reveal-left"
-            style={{ opacity: 0, transform: "translateX(120px)", transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)" }}
+            style={{
+              animation: `fadeInUp 0.5s cubic-bezier(0.22,1,0.36,1) both`,
+              animationDelay: "200ms",
+            }}
           >
             <div className="bg-card rounded-sm p-6 border border-border/60">
               <h3
