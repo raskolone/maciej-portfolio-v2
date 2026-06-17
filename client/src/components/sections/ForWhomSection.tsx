@@ -5,7 +5,6 @@
    ============================================================= */
 
 import { useState } from "react";
-import { useRevealAnimation } from "@/hooks/useRevealAnimation";
 import { useLanguage } from "@/contexts/LanguageContext";
 import {
   Presentation, Mail, Phone, UserPlus, Mic2, MessageSquare,
@@ -80,13 +79,12 @@ const individualGroups = [
 
 export default function ForWhomSection() {
   const { lang, t } = useLanguage();
-  const sectionRef = useRevealAnimation(110);
   const [activeTab, setActiveTab] = useState<"business" | "individual">("business");
 
   const groups = activeTab === "business" ? businessGroups : individualGroups;
 
   return (
-    <section id="for-whom" ref={sectionRef} className="py-24 bg-card/30">
+    <section id="for-whom" className="py-24 bg-card/30">
       <div className="container">
         {/* Header */}
         <div className="relative mb-10">
@@ -133,18 +131,19 @@ export default function ForWhomSection() {
           </button>
         </div>
 
-        {/* Cards grid */}
+        {/* Cards grid — bez reveal animation, karty zawsze widoczne */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {groups.map((group, idx) => {
             const data = lang === "pl" ? group.pl : group.en;
             const Icon = group.icon;
-            const revealClass = idx % 2 === 0 ? "reveal-left" : "reveal-right";
-            const initTransform = idx % 2 === 0 ? "translateX(-120px)" : "translateX(120px)";
             return (
               <div
-                key={group.pl.title}
-                className={`${revealClass} card-glow bg-card rounded-sm p-6 border border-border/60 hover:border-primary/35 transition-all duration-300`}
-                style={{ opacity: 0, transform: initTransform, transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)" }}
+                key={`${activeTab}-${idx}`}
+                className="card-glow bg-card rounded-sm p-6 border border-border/60 hover:border-primary/35 transition-all duration-300"
+                style={{
+                  animation: `fadeInUp 0.45s cubic-bezier(0.22,1,0.36,1) both`,
+                  animationDelay: `${idx * 70}ms`,
+                }}
               >
                 <div className="w-10 h-10 rounded-sm bg-primary/10 flex items-center justify-center mb-4">
                   <Icon size={18} className="text-primary" />
