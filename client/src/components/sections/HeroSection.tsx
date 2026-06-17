@@ -112,8 +112,8 @@ export default function HeroSection() {
           style={{ opacity: 0, animationDelay: "0.6s", animationFillMode: "forwards", fontFamily: "'DM Sans', sans-serif" }}
         >
           {t(
-            "Pomagam firmom przełamywać bariery komunikacyjne przez The Cribro Method — Full Immersion dopasowany do neuroóżnorodnych mózgw i zapracowanych menedżerów.",
-            "I help companies break communication barriers through The Cribro Method — Full Immersion designed for neurodivergent minds and busy managers."
+            "Pomagam firmom i osobom indywidualnym przełamywać bariery komunikacyjne — przez autorską The Cribro Method opartą na Full Immersion, dopasowaną do wyzwań dzisiejszego świata.",
+            "I help companies and individuals break communication barriers — through The Cribro Method, a Full Immersion approach tailored to the challenges of today's world."
           )}
         </p>
 
@@ -122,19 +122,17 @@ export default function HeroSection() {
           className="animate-fade-in-up flex flex-col sm:flex-row gap-3 mb-12"
           style={{ opacity: 0, animationDelay: "0.75s", animationFillMode: "forwards" }}
         >
-          <a
-            href="https://calendly.com/maciej-wyrozumski/30min"
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
             className="btn-primary"
           >
             {t("Umów bezpłatną konsultację", "Book Free Consultation")}
-          </a>
+          </button>
           <button
-            onClick={() => document.querySelector("#b2b")?.scrollIntoView({ behavior: "smooth" })}
+            onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
             className="btn-secondary"
           >
-            {t("Oferta dla firm", "For Business")}
+            {t("Napisz do mnie", "Contact Me")}
           </button>
         </div>
 
