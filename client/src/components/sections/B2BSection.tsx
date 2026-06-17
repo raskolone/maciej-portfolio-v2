@@ -53,8 +53,18 @@ const containerVariants = {
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 32 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.55 } },
+  hidden: { opacity: 0, y: -60, scaleY: 0.85, transformOrigin: "top" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scaleY: 1,
+    transition: {
+      // Jenga: block drops from above and lands with a subtle bounce
+      y: { type: "spring" as const, stiffness: 280, damping: 18, mass: 0.9 },
+      scaleY: { type: "spring" as const, stiffness: 300, damping: 22 },
+      opacity: { duration: 0.25 },
+    },
+  },
 };
 
 export default function B2BSection() {
