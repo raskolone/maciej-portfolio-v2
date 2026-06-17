@@ -10,7 +10,7 @@ import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { href: "#about",    pl: "O mnie",   en: "About" },
-  { href: "#method",   pl: "Metoda",   en: "Method" },
+  { href: "#method",   pl: "Metoda Cribro",   en: "Cribro Method" },
   { href: "#pricing",  pl: "Cennik",   en: "Pricing" },
   { href: "#faq",      pl: "FAQ",      en: "FAQ" },
   { href: "#contact",  pl: "Kontakt",  en: "Contact" },
@@ -83,26 +83,20 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <ul className="hidden lg:flex items-center gap-7">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <button
-                onClick={() => scrollTo(link.href)}
-                className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 400 }}
-              >
-                {lang === "pl" ? link.pl : link.en}
-              </button>
-            </li>
-          ))}
-          <li>
-            <button
-              onClick={() => scrollTo("#cribro-venture")}
-              className="text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
-              style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600 }}
-            >
-              Cribro
-            </button>
-          </li>
+          {navLinks.map((link) => {
+            const isCribro = link.href === "#method";
+            return (
+              <li key={link.href}>
+                <button
+                  onClick={() => scrollTo(link.href)}
+                  className={`text-sm transition-colors ${isCribro ? "text-primary font-semibold hover:text-primary/80" : "text-muted-foreground hover:text-primary"}`}
+                  style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: isCribro ? 600 : 400 }}
+                >
+                  {lang === "pl" ? link.pl : link.en}
+                </button>
+              </li>
+            );
+          })}
           <li>
             <button
               onClick={() => scrollTo("#b2b")}
@@ -111,17 +105,6 @@ export default function Navbar() {
             >
               {t("DLA FIRM", "FOR BUSINESS")}
             </button>
-          </li>
-          <li>
-            <a
-              href="https://recall.cribroenglish.pro"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs tracking-wide px-3 py-1.5 rounded border border-border/60 text-muted-foreground hover:text-primary hover:border-primary/40 transition-all"
-              style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 500 }}
-            >
-              {t("Panel kursanta", "Student Panel")}
-            </a>
           </li>
         </ul>
 
@@ -169,12 +152,7 @@ export default function Navbar() {
               {lang === "pl" ? link.pl : link.en}
             </button>
           ))}
-          <button
-            onClick={() => { setMenuOpen(false); scrollTo("#cribro-venture"); }}
-            className="text-left text-sm font-semibold text-primary hover:text-primary/80 transition-colors py-1"
-          >
-            Cribro
-          </button>
+
           <div className="flex items-center gap-4 pt-2">
             <button
               onClick={toggleLang}

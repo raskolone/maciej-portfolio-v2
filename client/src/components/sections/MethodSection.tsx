@@ -6,7 +6,7 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useRevealAnimation } from "@/hooks/useRevealAnimation";
 
-const ABOUT_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663586786146/TAFunkDrFdD3zZyACdoLmY/about-bg-TaevRFcopD2KaKEpjanKkc.webp";
+const METHOD_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663629907879/7jNV8eTUHBABzV8jpk3RUt/cribro-method-sieve-DqDvJw7DuzpihBR4PFzrjF.webp";
 
 const pillars = [
   {
@@ -49,9 +49,10 @@ export default function MethodSection() {
           <div className="reveal-left relative">
             <div className="relative overflow-hidden rounded-sm shadow-xl border border-primary/20">
               <img
-                src={ABOUT_BG}
+                src={METHOD_IMG}
                 alt={t("Metoda nauczania", "Teaching method")}
-                className="w-full h-80 lg:h-[500px] object-cover"
+                className="w-full h-80 lg:h-[500px] object-cover object-top"
+                style={{ mixBlendMode: "lighten", filter: "brightness(0.9) contrast(1.05)" }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
               <div className="absolute bottom-6 left-6 right-6">
@@ -78,7 +79,7 @@ export default function MethodSection() {
           <div className="reveal-right">
             <div className="relative mb-10">
               <span className="deco-number">03</span>
-              <p className="section-label mb-3">{t("Jak uczę", "How I Teach")}</p>
+              <p className="section-label mb-3">{t("Metoda Cribro", "Cribro Method")}</p>
               <h2
                 className="text-3xl md:text-4xl font-bold text-foreground"
                 style={{ fontFamily: "'Cormorant Garamond', serif" }}
