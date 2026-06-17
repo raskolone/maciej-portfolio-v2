@@ -5,7 +5,7 @@
    ============================================================= */
 import { useEffect, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useLocation } from "wouter";
+import { useLocation, Link } from "wouter";
 import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
@@ -110,6 +110,13 @@ export default function Navbar() {
             </button>
           </li>
           <li>
+            <Link href="/blog">
+              <span className={linkClass} style={linkStyle} onClick={() => setMenuOpen(false)}>
+                Blog
+              </span>
+            </Link>
+          </li>
+          <li>
             <button onClick={() => scrollTo("#contact")} className={linkClass} style={linkStyle}>
               {lang === "pl" ? "Kontakt" : "Contact"}
             </button>
@@ -167,6 +174,11 @@ export default function Navbar() {
           <button onClick={() => scrollTo("#faq")} className="text-left text-sm text-muted-foreground hover:text-primary transition-colors py-1">
             FAQ
           </button>
+          <Link href="/blog">
+            <span className="text-left text-sm text-muted-foreground hover:text-primary transition-colors py-1 block" onClick={() => setMenuOpen(false)}>
+              Blog
+            </span>
+          </Link>
           <button onClick={() => scrollTo("#contact")} className="text-left text-sm text-muted-foreground hover:text-primary transition-colors py-1">
             {lang === "pl" ? "Kontakt" : "Contact"}
           </button>

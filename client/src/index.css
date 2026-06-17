@@ -361,3 +361,148 @@
 .animate-cta-pulse {
   animation: ctaPulse 2.2s ease-in-out infinite;
 }
+
+/* =====================================================
+   BLOG CONTENT STYLES
+   Typografia artykułu — Cormorant + DM Sans, zielony akcent
+   ===================================================== */
+.blog-content {
+  color: oklch(0.85 0 0);
+  line-height: 1.8;
+  font-size: 1.0625rem;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.blog-content p {
+  margin-bottom: 1.5rem;
+  color: oklch(0.78 0 0);
+}
+
+.blog-content .blog-lead {
+  font-size: 1.2rem;
+  color: oklch(0.88 0 0);
+  line-height: 1.75;
+  margin-bottom: 2rem;
+}
+
+.blog-content h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: oklch(0.97 0 0);
+  margin-top: 3rem;
+  margin-bottom: 1.25rem;
+  line-height: 1.2;
+}
+
+.blog-content h3 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: oklch(0.92 0 0);
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.01em;
+}
+
+.blog-content strong {
+  color: oklch(0.97 0 0);
+  font-weight: 600;
+}
+
+.blog-content em {
+  color: oklch(0.72 0.22 145);
+  font-style: italic;
+}
+
+.blog-content .blog-divider {
+  border: none;
+  border-top: 1px solid oklch(1 0 0 / 0.08);
+  margin: 2.5rem 0;
+}
+
+.blog-content .blog-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.25rem 0 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.blog-content .blog-list li {
+  padding-left: 1.5rem;
+  position: relative;
+  color: oklch(0.78 0 0);
+}
+
+.blog-content .blog-list li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: oklch(0.72 0.22 145);
+  font-weight: 600;
+}
+
+.blog-content .blog-list--summary li {
+  padding-left: 1.5rem;
+}
+
+.blog-content .blog-list--summary li::before {
+  content: "✓";
+  color: oklch(0.72 0.22 145);
+}
+
+/* Verdict cards — tak/nie */
+.blog-verdict {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1.25rem 1.5rem;
+  border-radius: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid;
+}
+
+.blog-verdict--yes {
+  background: oklch(0.72 0.22 145 / 0.05);
+  border-color: oklch(0.72 0.22 145 / 0.2);
+}
+
+.blog-verdict--no {
+  background: oklch(1 0 0 / 0.02);
+  border-color: oklch(1 0 0 / 0.08);
+}
+
+.blog-verdict__icon {
+  font-size: 1rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+  width: 1.5rem;
+  text-align: center;
+}
+
+.blog-verdict--yes .blog-verdict__icon {
+  color: oklch(0.72 0.22 145);
+}
+
+.blog-verdict--no .blog-verdict__icon {
+  color: oklch(0.6 0 0);
+}
+
+.blog-verdict strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.blog-verdict p {
+  margin-bottom: 0 !important;
+  font-size: 0.9375rem;
+}
+
+.blog-verdict .blog-list {
+  margin-top: 0.75rem;
+  margin-bottom: 0;
+}

@@ -9,6 +9,8 @@ import { LanguageProvider } from "./contexts/LanguageContext";
 import Home from "./pages/Home";
 import Apps from "./pages/Apps";
 import CribroHome from "./pages/CribroHome";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 
 function Router() {
   return (
@@ -16,6 +18,8 @@ function Router() {
       <Route path={"/"} component={Home} />
       <Route path={"/apps"} component={Apps} />
       <Route path={"/cribro"} component={CribroHome} />
+      <Route path={"/blog"} component={Blog} />
+      <Route path={"/blog/:slug"} component={BlogPost} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>
