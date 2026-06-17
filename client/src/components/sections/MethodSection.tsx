@@ -33,6 +33,11 @@ const pillars = [
   },
   {
     num: "05",
+    pl: { title: "Kontekst, nie słówka", desc: "Nie uczę słówek z listy. Uczę języka w kontekście realnych sytuacji — spotkań, maili, rozmów telefonicznych. Słowo zapamiętane w kontekście zostaje na zawsze." },
+    en: { title: "Context, not vocabulary lists", desc: "I don't teach words from lists. I teach language in the context of real situations — meetings, emails, phone calls. A word learned in context stays forever." },
+  },
+  {
+    num: "06",
     pl: { title: "Mniej znaczy więcej", desc: "Nie zasypuję Cię materiałem. Każda lekcja ma jeden główny cel. Skupiamy się na tym, co daje 80% efektu — reszta to szum. Esencja, nie encyklopedia." },
     en: { title: "Less is more", desc: "I don't bury you in material. Every lesson has one main goal. We focus on what gives 80% of the result — the rest is noise. Essence, not encyclopedia." },
   },
