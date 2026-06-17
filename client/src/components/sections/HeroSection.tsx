@@ -1,8 +1,7 @@
 /* =============================================================
-   DESIGN: Dark Asymmetric B2B Hero
-   Split layout: left = headline + copy + CTAs + stats
-                 right = photo (smaller, editorial)
-   Background: animated grid blocks (GridCanvas replaces constellation)
+   DESIGN: Dark Constellation — Hero Section
+   Full-height hero with animated constellation canvas
+   Centered layout: avatar → name → typewriter → desc → CTAs
    ============================================================= */
 
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -15,229 +14,175 @@ export default function HeroSection() {
   const { lang, t } = useLanguage();
 
   const phrases = lang === "pl"
-    ? ["Business English dla firm", "Pronunciation Coach", "Full Immersion Trainer", "The Cribro Method"]
-    : ["Business English for Teams", "Pronunciation Coach", "Full Immersion Trainer", "The Cribro Method"];
+    ? ["Business English Expert", "Pronunciation Coach", "Full Immersion Trainer", "ADHD-Friendly Educator"]
+    : ["Business English Expert", "Pronunciation Coach", "Full Immersion Trainer", "ADHD-Friendly Educator"];
 
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center overflow-hidden bg-background"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background"
     >
-      {/* Constellation background — calm autonomous drift, no cursor interaction */}
+      {/* Animated constellation */}
       <ConstellationCanvas />
-
-      {/* Subtle radial gradient overlay */}
+      {/* Radial gradient overlay for depth — original from ZIP */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "radial-gradient(ellipse 80% 70% at 30% 50%, transparent 0%, oklch(0.11 0.015 240 / 70%) 100%)",
+          background: "radial-gradient(ellipse 70% 60% at 50% 50%, transparent 0%, oklch(0.11 0.015 240 / 60%) 100%)",
           zIndex: 1,
         }}
       />
 
-      {/* Main content — asymmetric two-column */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pt-24 pb-16">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-0 items-center min-h-[calc(100vh-6rem)]">
+      {/* Content */}
+      <div className="relative z-10 flex flex-col items-center text-center px-4 pt-16">
 
-          {/* LEFT COLUMN — text content */}
-          <div className="md:col-span-7 flex flex-col justify-center">
-
-            {/* Eyebrow label */}
+        {/* Avatar */}
+        <div
+          className="animate-fade-in mb-6"
+          style={{ opacity: 0, animationFillMode: "forwards" }}
+        >
+          <div className="relative inline-block">
+            {/* Outer pulse ring */}
             <div
-              className="animate-fade-in mb-4 flex items-center gap-3"
-              style={{ opacity: 0, animationFillMode: "forwards" }}
-            >
-              <div className="h-px w-10 bg-primary/60" />
-              <span
-                className="text-primary/80 text-[11px] tracking-[0.3em] uppercase font-semibold"
-                style={{ fontFamily: "'DM Mono', monospace" }}
-              >
-                CribroEnglish · The Cribro Method
-              </span>
-            </div>
-
-            {/* Main headline */}
+              className="absolute rounded-full animate-glow-pulse pointer-events-none"
+              style={{
+                inset: "-10px",
+                border: "1px solid rgba(74,222,128,0.25)",
+                animationDelay: "0s",
+              }}
+            />
+            {/* Inner pulse ring */}
             <div
-              className="animate-fade-in-up mb-4"
-              style={{ opacity: 0, animationDelay: "0.15s", animationFillMode: "forwards" }}
-            >
-              <h1
-                className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground leading-[1.05] tracking-tight"
-                style={{ fontFamily: "'Cormorant Garamond', serif" }}
-              >
-                {lang === "pl" ? (
-                  <>Twój zespół<br />zacznie mówić<br />po angielsku.<br /><span className="text-primary">Naprawdę.</span></>
-                ) : (
-                  <>Your team will<br />actually speak<br />English.<br /><span className="text-primary">For real.</span></>
-                )}
-              </h1>
-            </div>
-
-            {/* Typewriter role */}
+              className="absolute rounded-full animate-glow-pulse pointer-events-none"
+              style={{
+                inset: "-4px",
+                border: "1.5px solid rgba(74,222,128,0.45)",
+                animationDelay: "0.5s",
+              }}
+            />
+            {/* Photo */}
             <div
-              className="animate-fade-in-up mb-5 h-7"
-              style={{ opacity: 0, animationDelay: "0.3s", animationFillMode: "forwards" }}
+              className="w-48 h-48 md:w-60 md:h-60 rounded-full overflow-hidden border-2 border-primary/60"
+              style={{ boxShadow: "0 0 28px rgba(74,222,128,0.15)" }}
             >
-              <TypewriterText
-                phrases={phrases}
-                className="text-base md:text-lg font-semibold text-primary/90"
+              <img
+                src={AVATAR}
+                alt="Maciej Wyrozumski"
+                className="w-full h-full object-cover" style={{ objectPosition: "50% 15%" }}
               />
             </div>
-
-            {/* Description */}
-            <p
-              className="animate-fade-in-up text-sm md:text-base text-muted-foreground leading-relaxed mb-8 max-w-xl"
-              style={{ opacity: 0, animationDelay: "0.45s", animationFillMode: "forwards", fontFamily: "'DM Sans', sans-serif" }}
-            >
-              {t(
-                "10 lat doświadczenia. Faktury VAT. Raporty HR. The Cribro Method to system komunikacyjny oparty na Full Immersion — angielski, który zostaje, nie tylko na czas kursu.",
-                "10 years of experience. VAT invoices. HR reports. The Cribro Method is a communication system built on Full Immersion — English that sticks, not just during the course."
-              )}
-            </p>
-
-            {/* CTA buttons */}
-            <div
-              className="animate-fade-in-up flex flex-col sm:flex-row gap-3 mb-10"
-              style={{ opacity: 0, animationDelay: "0.6s", animationFillMode: "forwards" }}
-            >
-              <a
-                href="https://calendly.com/maciej-wyrozumski/30min"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary"
-              >
-                {t("Umów bezpłatną konsultację", "Book Free Consultation")}
-              </a>
-              <button
-                onClick={() => document.querySelector("#b2b")?.scrollIntoView({ behavior: "smooth" })}
-                className="btn-secondary"
-              >
-                {t("Oferta dla firm", "For Business")}
-              </button>
-            </div>
-
-            {/* Proof stats — bigger and bolder */}
-            <div
-              className="animate-fade-in flex flex-wrap gap-x-8 gap-y-4"
-              style={{ opacity: 0, animationDelay: "0.75s", animationFillMode: "forwards" }}
-            >
-              {[
-                { num: "10+", label: t("lat doświadczenia", "years experience") },
-                { num: "A1–C1", label: t("wszystkie poziomy", "all levels") },
-                { num: "100%", label: t("zajęcia po angielsku", "in English") },
-                { num: "VAT", label: t("faktura dla firmy", "invoice for company") },
-              ].map((item) => (
-                <div key={item.label} className="flex flex-col">
-                  <span
-                    className="text-primary font-bold text-2xl md:text-3xl leading-none"
-                    style={{ fontFamily: "'Cormorant Garamond', serif" }}
-                  >
-                    {item.num}
-                  </span>
-                  <span className="text-xs text-muted-foreground mt-1" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-                    {item.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            {/* Tagline */}
-            <div
-              className="animate-fade-in mt-10 flex items-center gap-2"
-              style={{ opacity: 0, animationDelay: "0.9s", animationFillMode: "forwards" }}
-            >
-              <div className="h-px w-8 bg-primary/40" />
-              <span
-                className="text-muted-foreground/50 text-[11px] tracking-[0.25em] uppercase"
-                style={{ fontFamily: "'DM Mono', monospace" }}
-              >
-                less noise. more language.
-              </span>
-            </div>
+            {/* Status dot */}
+            <div className="absolute bottom-2 right-2 glow-dot" />
           </div>
+        </div>
 
-          {/* RIGHT COLUMN — photo editorial */}
-          <div
-            className="md:col-span-5 flex items-center justify-center md:justify-end"
+        {/* Name */}
+        <div
+          className="animate-fade-in-up mb-2"
+          style={{ opacity: 0, animationDelay: "0.25s", animationFillMode: "forwards" }}
+        >
+          <h1
+            className="text-5xl md:text-7xl font-bold text-foreground leading-none tracking-tight"
+            style={{ fontFamily: "'Cormorant Garamond', serif" }}
           >
-            <div
-              className="animate-fade-in relative"
-              style={{ opacity: 0, animationDelay: "0.2s", animationFillMode: "forwards" }}
-            >
-              {/* Decorative corner lines */}
-              <div
-                className="absolute pointer-events-none"
-                style={{
-                  top: "-16px", left: "-16px",
-                  width: "40px", height: "40px",
-                  borderTop: "2px solid rgba(74,222,128,0.5)",
-                  borderLeft: "2px solid rgba(74,222,128,0.5)",
-                }}
-              />
-              <div
-                className="absolute pointer-events-none"
-                style={{
-                  bottom: "-16px", right: "-16px",
-                  width: "40px", height: "40px",
-                  borderBottom: "2px solid rgba(74,222,128,0.5)",
-                  borderRight: "2px solid rgba(74,222,128,0.5)",
-                }}
-              />
+            Maciej
+          </h1>
+          <p
+            className="text-base md:text-lg text-muted-foreground tracking-[0.35em] uppercase mt-1"
+            style={{ fontFamily: "'DM Mono', monospace" }}
+          >
+            Wyrozumski
+          </p>
+        </div>
 
-              {/* White pulse glow ring around photo */}
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  borderRadius: "2px",
-                  boxShadow: "0 0 0 1px rgba(255,255,255,0.12), 0 0 24px 4px rgba(255,255,255,0.07), 0 0 60px 12px rgba(255,255,255,0.04)",
-                  animation: "photoPulse 3.5s ease-in-out infinite",
-                }}
-              />
+        {/* Typewriter subtitle */}
+        <div
+          className="animate-fade-in-up mb-5 h-8"
+          style={{ opacity: 0, animationDelay: "0.45s", animationFillMode: "forwards" }}
+        >
+          <TypewriterText
+            phrases={phrases}
+            className="text-lg md:text-xl font-semibold text-primary"
+          />
+        </div>
 
-              {/* Photo — smaller, portrait crop */}
-              <div
-                className="w-56 h-72 md:w-72 md:h-96 overflow-hidden"
-                style={{
-                  border: "1px solid rgba(255,255,255,0.15)",
-                  boxShadow: "0 0 0 1px rgba(255,255,255,0.06), 0 20px 60px rgba(0,0,0,0.6)",
-                }}
+        {/* Description */}
+        <p
+          className="animate-fade-in-up text-sm md:text-base text-muted-foreground leading-relaxed mb-8 max-w-lg"
+          style={{ opacity: 0, animationDelay: "0.6s", animationFillMode: "forwards", fontFamily: "'DM Sans', sans-serif" }}
+        >
+          {t(
+            "Pomagam firmom przełamywać bariery komunikacyjne przez The Cribro Method — Full Immersion dopasowany do neuroóżnorodnych mózgw i zapracowanych menedżerów.",
+            "I help companies break communication barriers through The Cribro Method — Full Immersion designed for neurodivergent minds and busy managers."
+          )}
+        </p>
+
+        {/* CTA buttons */}
+        <div
+          className="animate-fade-in-up flex flex-col sm:flex-row gap-3 mb-12"
+          style={{ opacity: 0, animationDelay: "0.75s", animationFillMode: "forwards" }}
+        >
+          <a
+            href="https://calendly.com/maciej-wyrozumski/30min"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary"
+          >
+            {t("Umów bezpłatną konsultację", "Book Free Consultation")}
+          </a>
+          <button
+            onClick={() => document.querySelector("#b2b")?.scrollIntoView({ behavior: "smooth" })}
+            className="btn-secondary"
+          >
+            {t("Oferta dla firm", "For Business")}
+          </button>
+        </div>
+
+        {/* Proof stats */}
+        <div
+          className="animate-fade-in flex flex-wrap justify-center gap-x-8 gap-y-3"
+          style={{ opacity: 0, animationDelay: "0.9s", animationFillMode: "forwards" }}
+        >
+          {[
+            { num: "10+", label: t("lat doświadczenia", "years experience") },
+            { num: "A1–C1", label: t("wszystkie poziomy", "all levels") },
+            { num: "100%", label: t("zajęcia po angielsku", "lessons in English") },
+          ].map((item) => (
+            <div key={item.label} className="flex items-center gap-2">
+              <span
+                className="text-primary font-bold"
+                style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem" }}
               >
-                <img
-                  src={AVATAR}
-                  alt="Maciej Wyrozumski"
-                  className="w-full h-full object-cover"
-                  style={{ objectPosition: "50% 10%" }}
-                />
-              </div>
-
-              {/* Name badge */}
-              <div
-                className="absolute -bottom-5 left-1/2 -translate-x-1/2 px-4 py-2 text-center"
-                style={{
-                  background: "oklch(0.13 0.02 240)",
-                  border: "1px solid rgba(74,222,128,0.2)",
-                  minWidth: "160px",
-                }}
-              >
-                <p
-                  className="text-foreground font-bold text-sm tracking-wide"
-                  style={{ fontFamily: "'Cormorant Garamond', serif" }}
-                >
-                  Maciej Wyrozumski
-                </p>
-                <p
-                  className="text-primary/70 text-[10px] tracking-[0.2em] uppercase"
-                  style={{ fontFamily: "'DM Mono', monospace" }}
-                >
-                  English Coach & Builder
-                </p>
-              </div>
-
-              {/* Status dot */}
-              <div className="absolute top-3 right-3 glow-dot" />
+                {item.num}
+              </span>
+              <span className="text-xs text-muted-foreground" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                {item.label}
+              </span>
             </div>
-          </div>
+          ))}
+        </div>
 
+        {/* Tagline + CribroEnglish brand */}
+        <div
+          className="animate-fade-in mt-10 mb-6 flex flex-col items-center gap-2"
+          style={{ opacity: 0, animationDelay: "1.1s", animationFillMode: "forwards" }}
+        >
+          <div className="flex items-center gap-2">
+            <div className="h-px w-8 bg-primary/40" />
+            <span
+              className="text-muted-foreground/60 text-[11px] tracking-[0.25em] uppercase"
+              style={{ fontFamily: "'DM Mono', monospace" }}
+            >
+              less noise. more language.
+            </span>
+            <div className="h-px w-8 bg-primary/40" />
+          </div>
+          <span
+            className="text-primary/70 text-[10px] tracking-[0.3em] uppercase font-bold"
+            style={{ fontFamily: "'DM Mono', monospace" }}
+          >
+            CribroEnglish
+          </span>
         </div>
       </div>
     </section>

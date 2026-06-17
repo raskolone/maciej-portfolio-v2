@@ -103,21 +103,9 @@ export default function MethodSection() {
                 className="text-3xl md:text-4xl font-bold text-foreground"
                 style={{ fontFamily: "'Cormorant Garamond', serif" }}
               >
-                {t("The Cribro Method", "The Cribro Method")}
+                {t("Pięć filarów mojej metody", "Five pillars of my method")}
               </h2>
               <div className="rule-ink mt-6 max-w-xs" />
-              {/* Method intro */}
-              <div className="mt-6 p-4 border-l-2 border-primary/40 bg-primary/5">
-                <p className="text-sm text-muted-foreground leading-relaxed" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-                  {t(
-                    "The Cribro Method to nie kolejny kurs angielskiego. To system komunikacyjny oparty na pełnym zanurzeniu — zaprojektowany dla ludzi, którzy chcą realnych efektów, nie certyfikatów. Mniej szumu, więcej języka. Każda lekcja ma jeden cel: sprawić, żebyś myślał po angielsku, nie tłumaczył.",
-                    "The Cribro Method isn't just another English course. It's a communication system built on full immersion — designed for people who want real results, not certificates. Less noise, more language. Every lesson has one goal: to make you think in English, not translate."
-                  )}
-                </p>
-              </div>
-              <p className="mt-6 mb-3 text-xs text-muted-foreground/60 uppercase tracking-widest" style={{ fontFamily: "'DM Mono', monospace" }}>
-                {t("Pięć filarów", "Five pillars")}
-              </p>
             </div>
 
             <div className="space-y-6">

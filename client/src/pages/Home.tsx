@@ -22,11 +22,11 @@ export default function Home() {
       <main>
         <HeroSection />
         <B2BSection />
+        <ForWhomSection />
         <MethodSection />
         <AboutSection />
         <MyStorySection />
         <PricingSection />
-        <ForWhomSection />
         <FAQSection />
         <ContactSection />
       </main>

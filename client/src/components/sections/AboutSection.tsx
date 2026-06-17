@@ -184,86 +184,151 @@ export default function AboutSection() {
           </div>
         </div>
 
-      </div>
+        {/* ── ZIELONA LINIA SEPARATORA ── */}
+        <div
+          className="reveal-about my-12"
+          style={{
+            opacity: 0,
+            transform: "translateY(8px)",
+            transition: "opacity 0.5s ease, transform 0.5s ease",
+          }}
+        >
+          <div
+            style={{
+              height: "1px",
+              background: "linear-gradient(90deg, transparent 0%, oklch(0.65 0.2 145 / 0.6) 20%, oklch(0.65 0.2 145 / 0.8) 50%, oklch(0.65 0.2 145 / 0.6) 80%, transparent 100%)",
+              boxShadow: "0 0 8px oklch(0.65 0.2 145 / 0.4)",
+            }}
+          />
+        </div>
 
-      {/* ── SEKCJA CRIBRO — pełna szerokość, zintegrowana wizualnie ── */}
-      <div
-        id="cribro-venture"
-        className="mt-0"
-        style={{
-          background: "linear-gradient(135deg, oklch(0.13 0.02 240) 0%, oklch(0.11 0.015 240) 100%)",
-          borderTop: "1px solid oklch(0.65 0.2 145 / 0.15)",
-          scrollMarginTop: "80px",
-        }}
-      >
-        <div className="container py-16">
-          <div className="grid lg:grid-cols-12 gap-8 items-center">
+        {/* ── SEKCJA NOWE PRZEDSIĘWZIĘCIE — pełna szerokość, wyrównana do siatki ── */}
+        <div id="cribro-venture" className="grid lg:grid-cols-12 gap-12 items-start" style={{ scrollMarginTop: "80px" }}>
 
-            {/* Left: logo + brand name */}
-            <div className="lg:col-span-4">
-              <div
-                className="reveal-about flex items-center gap-5"
-                style={{ opacity: 0, transform: "translateX(-20px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
+          {/* Left column: logo z pulsarem */}
+          <div className="lg:col-span-4">
+            <div className="relative mb-4">
+              <p
+                className="section-label mb-6"
               >
-                <div
-                  className="flex-shrink-0 overflow-hidden"
-                  style={{
-                    width: "72px",
-                    height: "72px",
-                    borderRadius: "2px",
-                    border: "1px solid oklch(0.65 0.2 145 / 0.3)",
-                    background: "oklch(0.09 0.01 240)",
-                  }}
-                >
-                  <img
-                    src="https://d2xsxph8kpxj0f.cloudfront.net/310519663629907879/7jNV8eTUHBABzV8jpk3RUt/cribro-logo-main-fHanUQCNitTqJDBVpNRV8F.webp"
-                    alt="Cribro"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div>
-                  <p
-                    className="text-xs text-primary/60 tracking-[0.2em] uppercase mb-1"
-                    style={{ fontFamily: "'DM Mono', monospace" }}
-                  >
-                    {t("Nowe przedsięwzięcie", "New venture")}
-                  </p>
-                  <h3
-                    className="text-2xl font-bold text-foreground"
-                    style={{ fontFamily: "'Cormorant Garamond', serif" }}
-                  >
-                    Cribro
-                  </h3>
-                </div>
+                {t("Nowe przedsięwzięcie", "New venture")}
+              </p>
+            </div>
+            <div
+              className="reveal-about relative inline-block"
+              style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
+            >
+              {/* Outer pulse ring */}
+              <div
+                className="absolute animate-glow-pulse pointer-events-none"
+                style={{
+                  inset: "-10px",
+                  border: "1px solid oklch(0.65 0.2 145 / 0.25)",
+                  borderRadius: "4px",
+                  animationDelay: "0s",
+                }}
+              />
+              {/* Inner pulse ring */}
+              <div
+                className="absolute animate-glow-pulse pointer-events-none"
+                style={{
+                  inset: "-4px",
+                  border: "1.5px solid oklch(0.65 0.2 145 / 0.45)",
+                  borderRadius: "4px",
+                  animationDelay: "0.5s",
+                }}
+              />
+              {/* Logo image */}
+              <div
+                className="overflow-hidden"
+                style={{
+                  width: "100%",
+                  maxWidth: "260px",
+                  borderRadius: "2px",
+                  boxShadow: "0 0 24px oklch(0.65 0.2 145 / 0.18), 0 4px 16px rgba(0,0,0,0.5)",
+                  border: "1px solid oklch(0.65 0.2 145 / 0.25)",
+                }}
+              >
+                <img
+                  src="https://d2xsxph8kpxj0f.cloudfront.net/310519663629907879/7jNV8eTUHBABzV8jpk3RUt/cribro-logo-main-fHanUQCNitTqJDBVpNRV8F.webp"
+                  alt="CriBro"
+                  className="w-full object-cover"
+                  style={{ display: "block" }}
+                />
               </div>
             </div>
 
-            {/* Right: opis + link */}
-            <div className="lg:col-span-8">
-              <div
-                className="reveal-about"
-                style={{ opacity: 0, transform: "translateX(20px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
+            {/* Boks Cribro Labs — Aplikacje, szerokość = logo (maxWidth 260px) */}
+            <div
+              className="reveal-about mt-8"
+              style={{
+                opacity: 0,
+                transform: "translateY(16px)",
+                transition: "opacity 0.5s ease, transform 0.5s ease",
+                maxWidth: "260px",
+              }}
+            >
+              <a
+                href="/apps"
+                className="block group"
+                style={{ textDecoration: "none" }}
               >
-                <p className="text-sm text-muted-foreground leading-relaxed mb-5 max-w-2xl">
-                  {t(
-                    "Cribro to marka na styku języka, technologii i neuroóżnorodności. Dwa odłamy: CriBro English — system nauki angielskiego oparty na Full Immersion, oraz Cribro Labs — narzędzia ADHD-friendly, które pomagają mózgowi działać na własnych zasadach.",
-                    "Cribro is a brand at the intersection of language, technology, and neurodiversity. Two branches: CriBro English — a Full Immersion language learning system, and Cribro Labs — ADHD-friendly tools that help the brain work on its own terms."
-                  )}
-                </p>
-                <a
-                  href="/cribro"
-                  className="inline-flex items-center gap-2 text-sm text-primary font-medium hover:text-primary/80 transition-colors"
-                  style={{ fontFamily: "'DM Mono', monospace", letterSpacing: "0.05em" }}
+                <div
+                  style={{
+                    border: "1px solid oklch(0.65 0.2 145 / 0.35)",
+                    borderRadius: "2px",
+                    padding: "12px 16px",
+                    background: "oklch(0.65 0.2 145 / 0.05)",
+                    transition: "background 0.2s ease, border-color 0.2s ease",
+                  }}
+                  className="group-hover:bg-primary/10 group-hover:border-primary/60"
                 >
-                  {t("Dowiedz się więcej →", "Learn more →")}
-                </a>
-              </div>
+                  <p
+                    className="text-xs text-primary/60 tracking-[0.18em] uppercase mb-1"
+                    style={{ fontFamily: "'DM Mono', monospace" }}
+                  >
+                    {t("Aplikacje", "Apps")}
+                  </p>
+                  <p
+                    className="text-sm font-semibold text-primary group-hover:text-primary/90 transition-colors"
+                    style={{ fontFamily: "'DM Sans', sans-serif" }}
+                  >
+                    Cribro Labs
+                  </p>
+                </div>
+              </a>
             </div>
 
           </div>
-        </div>
-      </div>
 
+          {/* Right column: opis Cribro — wyrównany z tekstem O mnie */}
+          <div className="lg:col-span-8">
+            <div
+              className="reveal-about space-y-4"
+              style={{ opacity: 0, transform: "translateY(16px)", transition: "opacity 0.5s ease, transform 0.5s ease" }}
+            >
+              <p className="text-base text-foreground leading-relaxed">
+                {t(
+                  "Cribro to marka, którą buduję na styku języka, technologii i neuroróżnorodności. Dwa odłamy — jeden skupiony na nauce angielskiego i budowaniu nawyków językowych (CriBro English), drugi na tworzeniu oprogramowania przyjaznego ADHD: narzędzi, które redukują rozproszenie, wspierają koncentrację i pomagają mózgowi działać na własnych zasadach.",
+                  "Cribro is a brand I'm building at the intersection of language, technology, and neurodiversity. Two branches — one focused on English learning and building language habits (CriBro English), the other on developing ADHD-friendly software: tools that reduce distraction, support focus, and help the brain work on its own terms."
+                )}
+              </p>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {t(
+                  "Wyobraźnia jest jedynym ograniczeniem. Buduję rzeczy, które działają — dla ludzi, którym standardowe rozwiązania nie wystarczają.",
+                  "Imagination is the only limit. I build things that work — for people who find standard solutions insufficient."
+                )}
+              </p>
+              <div className="flex flex-wrap gap-2 pt-2">
+                {["CriBro English", "ADHD-Friendly Tech", "EdTech", "Habit Building", "cribro.pro"].map((tag) => (
+                  <span key={tag} className="tag-green" style={{ fontSize: "10px" }}>{tag}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </section>
   );
 }
