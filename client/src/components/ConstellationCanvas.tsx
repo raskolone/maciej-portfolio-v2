@@ -1,6 +1,7 @@
 /* =============================================================
    DESIGN: Dark Constellation — Animated Canvas Background
    Spokojne, autonomiczne gwiazdy krążące w tle — bez interakcji z kursorem.
+   ResizeObserver gwarantuje poprawne wymiary canvas przy montowaniu.
    ============================================================= */
 
 import { useEffect, useRef } from "react";
@@ -31,26 +32,45 @@ export default function ConstellationCanvas() {
 
     const isDark = theme !== "light";
 
-    const resize = () => {
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-      const isMobile = canvas.width < 768;
+    const initStars = (W: number, H: number) => {
+      const isMobile = W < 768;
       const starCount = isMobile ? 50 : 100;
       starsRef.current = Array.from({ length: starCount }, () => ({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.25,
-        vy: (Math.random() - 0.5) * 0.25,
+        x: Math.random() * W,
+        y: Math.random() * H,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
         radius: Math.random() * 1.4 + 0.4,
         opacity: Math.random() * 0.4 + 0.5,
       }));
     };
+
+    const resize = () => {
+      const parent = canvas.parentElement;
+      const W = parent ? parent.clientWidth : window.innerWidth;
+      const H = parent ? parent.clientHeight : window.innerHeight;
+      canvas.width = W;
+      canvas.height = H;
+      initStars(W, H);
+    };
+
+    // Use ResizeObserver on parent to catch actual rendered dimensions
+    const parent = canvas.parentElement;
+    let ro: ResizeObserver | null = null;
+    if (parent) {
+      ro = new ResizeObserver(() => resize());
+      ro.observe(parent);
+    }
     resize();
     window.addEventListener("resize", resize);
 
     const draw = () => {
       const W = canvas.width;
       const H = canvas.height;
+      if (W === 0 || H === 0) {
+        animRef.current = requestAnimationFrame(draw);
+        return;
+      }
       ctx.clearRect(0, 0, W, H);
       const stars = starsRef.current;
 
@@ -118,6 +138,7 @@ export default function ConstellationCanvas() {
     return () => {
       cancelAnimationFrame(animRef.current);
       window.removeEventListener("resize", resize);
+      if (ro) ro.disconnect();
     };
   }, [theme]);
 
