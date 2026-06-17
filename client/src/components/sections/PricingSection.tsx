@@ -3,7 +3,6 @@
    Clean pricing table with 5 options
    ============================================================= */
 
-import { useRef } from "react";
 import { useRevealAnimation } from "@/hooks/useRevealAnimation";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Check } from "lucide-react";

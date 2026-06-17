@@ -3,7 +3,6 @@
    4 pillars of teaching method, asymmetric layout
    ============================================================= */
 
-import { useRef } from "react";
 import { useRevealAnimation } from "@/hooks/useRevealAnimation";
 import { useLanguage } from "@/contexts/LanguageContext";
 

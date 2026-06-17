@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import LoadingScreen from "./components/LoadingScreen";
+import { useEffect } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
@@ -24,23 +23,12 @@ function Router() {
 }
 
 function App() {
-  const [loading, setLoading] = useState(() => {
-    // Show loading screen only once per session
-    return !sessionStorage.getItem("cribro_loaded");
-  });
-
-  const handleLoadingComplete = () => {
-    sessionStorage.setItem("cribro_loaded", "1");
-    setLoading(false);
-  };
-
   useEffect(() => {
     document.title = "Maciej Wyrozumski — English Coach & Builder";
   }, []);
 
   return (
     <ErrorBoundary>
-      {loading && <LoadingScreen onComplete={handleLoadingComplete} />}
       <ThemeProvider
         defaultTheme="dark"
       >

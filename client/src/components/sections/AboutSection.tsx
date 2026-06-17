@@ -3,7 +3,6 @@
    Personal, warm, short biography
    ============================================================= */
 
-import { useRef } from "react";
 import { useRevealAnimation } from "@/hooks/useRevealAnimation";
 import { useLanguage } from "@/contexts/LanguageContext";
 

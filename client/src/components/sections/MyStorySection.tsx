@@ -4,7 +4,6 @@
    Positioned between About and Method sections
    ============================================================= */
 
-import { useRef } from "react";
 import { useRevealAnimation } from "@/hooks/useRevealAnimation";
 import { useLanguage } from "@/contexts/LanguageContext";
 

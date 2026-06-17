@@ -3,10 +3,9 @@
    Cards grid showing target groups
    ============================================================= */
 
-import { useRef } from "react";
 import { useRevealAnimation } from "@/hooks/useRevealAnimation";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Briefcase, GraduationCap, Users, Globe, BookOpen, Mic, Brain } from "lucide-react";
+import { Briefcase, Users, Globe, BookOpen, Mic, Brain } from "lucide-react";
 
 const groups = [
   {
@@ -23,11 +22,6 @@ const groups = [
     icon: Mic,
     pl: { title: "Pronunciation Coaching", desc: "Popraw wymowę, rytm wypowiedzi i akcent. Specjalizuję się w fonetyce i naturalnym brzmieniu." },
     en: { title: "Pronunciation Coaching", desc: "Improve your pronunciation, speech rhythm, and accent. I specialize in phonetics and natural sound." },
-  },
-  {
-    icon: GraduationCap,
-    pl: { title: "Maturzyści", desc: "Przygotowanie do matury podstawowej i rozszerzonej. Egzaminy Cambridge. Pewność na egzaminie ustnym." },
-    en: { title: "Exam Preparation", desc: "Preparation for Polish school exams and Cambridge certificates. Confidence in the oral exam." },
   },
   {
     icon: Globe,
@@ -72,14 +66,16 @@ export default function ForWhomSection() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {groups.map((group) => {
+          {groups.map((group, idx) => {
             const data = lang === "pl" ? group.pl : group.en;
             const Icon = group.icon;
+            const revealClass = idx % 2 === 0 ? "reveal-left" : "reveal-right";
+            const initTransform = idx % 2 === 0 ? "translateX(-120px)" : "translateX(120px)";
             return (
               <div
                 key={group.pl.title}
-                className="reveal-left card-glow bg-card rounded-sm p-6 border border-border/60"
-                style={{ opacity: 0, transform: "translateX(-120px)", transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)" }}
+                className={`${revealClass} card-glow bg-card rounded-sm p-6 border border-border/60`}
+                style={{ opacity: 0, transform: initTransform, transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)" }}
               >
                 <div className="w-10 h-10 rounded-sm bg-primary/10 flex items-center justify-center mb-4">
                   <Icon size={18} className="text-primary" />
