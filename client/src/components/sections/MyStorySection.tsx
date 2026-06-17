@@ -16,16 +16,16 @@ export default function MyStorySection() {
   return (
     <section id="my-story" ref={sectionRef} className="py-24 bg-background relative overflow-hidden">
 
-      {/* Subtle background glow */}
+      {/* Subtle background glow — contained within section */}
       <div
-        className="absolute top-1/2 right-0 w-[500px] h-[500px] rounded-full pointer-events-none"
+        className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[400px] h-[400px] rounded-full pointer-events-none"
         style={{
-          background: "radial-gradient(ellipse at center, oklch(0.72 0.22 145 / 0.05) 0%, transparent 70%)",
+          background: "radial-gradient(ellipse at center, oklch(0.72 0.22 145 / 0.06) 0%, transparent 65%)",
         }}
       />
 
       <div className="container relative z-10">
-        <div className="grid lg:grid-cols-12 gap-12 items-start">
+        <div className="grid lg:grid-cols-12 gap-16 items-center">
 
           {/* LEFT COLUMN — text */}
           <div className="reveal-left lg:col-span-7">
@@ -120,31 +120,17 @@ export default function MyStorySection() {
           </div>
 
           {/* RIGHT COLUMN — Jenga image */}
-          <div className="reveal-right lg:col-span-5 flex flex-col items-center justify-start">
-            <div className="relative w-full max-w-xs mx-auto">
-              {/* Glow behind image */}
-              <div
-                className="absolute inset-0 rounded-sm pointer-events-none"
-                style={{
-                  boxShadow: "0 0 60px 20px oklch(0.72 0.22 145 / 0.18), 0 0 120px 40px oklch(0.72 0.22 145 / 0.08)",
-                }}
-              />
+          <div className="reveal-right lg:col-span-5 flex items-center justify-center">
+            <div className="relative w-full">
               <img
                 src={JENGA_IMG}
                 alt={t("Wieża Jenga — metafora odbudowy", "Jenga tower — metaphor of rebuilding")}
-                className="relative z-10 w-full rounded-sm shadow-2xl"
+                className="w-full h-auto"
                 style={{
-                  border: "1px solid oklch(0.72 0.22 145 / 0.25)",
-                  filter: "brightness(0.95) contrast(1.05)",
+                  filter: "brightness(0.92) contrast(1.08) drop-shadow(0 0 32px oklch(0.72 0.22 145 / 0.35))",
+                  mixBlendMode: "lighten",
                 }}
               />
-              {/* Caption */}
-              <p
-                className="text-xs text-muted-foreground/50 text-center mt-3 tracking-widest uppercase"
-                style={{ fontFamily: "'DM Mono', monospace" }}
-              >
-                {t("Klocek po klocku", "Block by block")}
-              </p>
             </div>
           </div>
 
