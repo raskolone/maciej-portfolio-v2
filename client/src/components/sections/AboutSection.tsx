@@ -26,7 +26,7 @@ export default function AboutSection() {
       <div className="container">
 
         {/* ── GÓRNA CZĘŚĆ: O MNIE ── */}
-        <div className="grid lg:grid-cols-12 gap-12 items-start">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
 
           {/* Left column: label + heading + stats */}
           <div className="lg:col-span-4">
@@ -44,7 +44,7 @@ export default function AboutSection() {
 
             {/* Stats */}
             <div
-              className="reveal-left grid grid-cols-3 lg:grid-cols-1 gap-4 mt-8"
+              className="reveal-left grid grid-cols-3 lg:grid-cols-1 gap-3 mt-6"
               style={{ opacity: 0, transform: "translateX(-120px)", transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)" }}
             >
               {stats.map((stat) => (
@@ -185,7 +185,7 @@ export default function AboutSection() {
         </div>
 
         {/* ── DOLNA CZĘŚĆ: MOJA HISTORIA ── */}
-        <div className="grid lg:grid-cols-12 gap-0 items-stretch">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-0 items-stretch">
 
           {/* Left: text (7 cols) */}
           <div className="lg:col-span-7 space-y-7 pr-0 lg:pr-10">
@@ -303,7 +303,7 @@ export default function AboutSection() {
 
           {/* Right: Jenga image (5 cols) — element tła, bez ramki, mix-blend-mode lighten */}
           <div
-            className="reveal-right hidden lg:flex lg:col-span-5 items-stretch relative"
+            className="reveal-right hidden lg:flex lg:col-span-5 items-stretch relative" aria-hidden="true"
             style={{
               opacity: 0,
               transform: "translateX(120px)",
