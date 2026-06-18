@@ -9,7 +9,7 @@ import { useRevealAnimation } from "@/hooks/useRevealAnimation";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const PHOTO = "https://d2xsxph8kpxj0f.cloudfront.net/310519663489474725/R7k6sYKTkLq9Ymom2yutju/maciej-photo-editorial_4c075e9b.png";
-const JENGA = "/manus-storage/jenga-rebuild-dark_9e9dd26c.png";
+const JENGA = "/images/jenga-rebuild-dark.png";
 
 const stats = [
   { num: "10+", pl: "lat doświadczenia", en: "years of experience" },

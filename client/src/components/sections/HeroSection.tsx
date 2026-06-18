@@ -8,7 +8,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import ConstellationCanvas from "@/components/ConstellationCanvas";
 import TypewriterText from "@/components/TypewriterText";
 
-const AVATAR = "/manus-storage/maciej-hero-new_e2364866.webp";
+const AVATAR = "/images/maciej-hero-new.webp";
 
 export default function HeroSection() {
   const { lang, t } = useLanguage();
