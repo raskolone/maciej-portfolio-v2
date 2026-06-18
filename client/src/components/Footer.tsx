@@ -91,7 +91,7 @@ export default function Footer() {
                 <Linkedin size={13} />
                 LinkedIn
               </a>
-              <a href="https://github.com/maciejwyrozumski" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+              <a href="https://github.com/raskolone?tab=repositories" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
                 <Github size={13} />
                 GitHub
               </a>
