@@ -117,7 +117,7 @@ export default function ContactSection() {
                 +48 536 524 867
               </a>
               <a
-                href="https://linkedin.com/in/maciej-wyrozumski"
+                href="https://www.linkedin.com/in/maciej-pro"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors group"
