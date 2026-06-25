@@ -8,7 +8,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import ConstellationCanvas from "@/components/ConstellationCanvas";
 import TypewriterText from "@/components/TypewriterText";
 
-const PHOTO = "/manus-storage/maciej-hero-nobg_9bb9eec0.png";
+const PHOTO = "/manus-storage/maciej-hero-dark_b901172b.jpg";
 
 export default function HeroSection() {
   const { t } = useLanguage();
@@ -39,7 +39,7 @@ export default function HeroSection() {
       {/* Photo — absolute right, full height, no background */}
       <div
         className="absolute right-0 top-0 h-full hidden lg:block"
-        style={{ zIndex: 2, width: "48%" }}
+        style={{ zIndex: 2, width: "48%", background: "transparent", overflow: "hidden" }}
       >
         <img
           src={PHOTO}
