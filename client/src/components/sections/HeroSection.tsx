@@ -44,15 +44,11 @@ export default function HeroSection() {
         <img
           src={PHOTO}
           alt="Maciej Wyrozumski"
-          className="h-full w-full object-cover object-top"
+          className="h-full w-auto max-w-none"
           style={{
-            maskImage:
-              "linear-gradient(to right, transparent 0%, black 18%, black 80%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%)",
-            WebkitMaskImage:
-              "linear-gradient(to right, transparent 0%, black 18%, black 80%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%)",
-            maskComposite: "intersect",
-            WebkitMaskComposite: "source-in",
-            filter: "brightness(0.92) contrast(1.08)",
+            objectFit: "contain",
+            objectPosition: "center top",
+            filter: "brightness(0.95) contrast(1.05)",
           }}
         />
       </div>
