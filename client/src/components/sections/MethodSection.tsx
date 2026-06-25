@@ -8,7 +8,7 @@
 import { useRevealAnimation } from "@/hooks/useRevealAnimation";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-const ABOUT_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663629907879/7jNV8eTUHBABzV8jpk3RUt/cribro-essentialism-v3-eTd4ydA4VZs4imCwejVKEg.webp";
+const ABOUT_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663629907879/7jNV8eTUHBABzV8jpk3RUt/cribro-essentialism-gVypq4hBZzjdeskBV7Twfa.webp";
 
 const pillars = [
   {
@@ -110,14 +110,15 @@ export default function MethodSection() {
             className="reveal-right"
             style={{ opacity: 0, transform: "translateX(120px)", transition: "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)" }}
           >
-            <div className="relative overflow-hidden rounded-sm">
+            <div className="relative overflow-hidden rounded-sm shadow-xl border border-primary/20">
               <img
                 src={ABOUT_BG}
                 alt={t("Metoda Cribro", "Cribro Method")}
-                className="w-full h-72 lg:h-[400px] object-contain"
+                className="w-full h-72 lg:h-[400px] object-cover"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/70 to-transparent" />
               <div className="absolute bottom-5 left-5 right-5">
-                <p className="text-sm text-muted-foreground/70 leading-relaxed text-center">
+                <p className="text-sm text-muted-foreground leading-relaxed">
                   {t(
                     "Nie potrzebujesz więcej czasu. Potrzebujesz lepszego systemu.",
                     "You don't need more time. You need a better system."
